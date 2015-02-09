@@ -1,0 +1,15 @@
+<h2> Add a dog</h2>
+
+<%= form_for @dog do |f| %>
+
+	<p>Name: <%= f.text_field :dog_name %></p>
+	<p>Breed: <%=f.text_field :breed %></p>
+	<p>Birthday: <%=f.date_field :birthday %></p>
+	<p>Food low? <%=f.check_box :food_low_flag %></p> <!-- Shows checkbox based on database value -->
+	<p>Treats low? <%=f.check_box :treats_low_flag %></p> <!-- Shows checkbox based on database value -->
+	<p>Photo location: <%=f.text_field :photo_path %></p>
+	<!-- <p> <%#= f.collection_select %> </p> --> <!-- Question: Somehow show all the owners here and allow editing of owners-->
+
+	<%= f.submit 'Add this dog!' %>
+
+<% end %>
