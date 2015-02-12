@@ -5,17 +5,54 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 </head>
 <body>
 
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- This part creates the icon with three lines, when the device gets small enough to require collapsing of the navbar -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span> <!-- This part is for screen readers only -->
+        <span class="icon-bar"></span> <!-- This creates one of the three horizontal lines you see in the button -->
+        <span class="icon-bar"></span> <!-- See comment in above line -->
+        <span class="icon-bar"></span><!-- See comment in above line -->
+      </button>
+      <a class="navbar-brand" href="#">Dogs!</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right"> <!-- This part has the links -->
+        <li><a href="#">Edit my profile</a></li>
+        <li><a href="#">Log out</a></li>
+      </ul>
+      <!-- This part has the search bar and button -->
+<!--       <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form> -->
+      
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+
 <%= yield %>
 
-<br>
-<br>
-<hr>
-<h3>Parameters (delete this from application.html.erb later!)</h3>
-<%= params.inspect %>
-
+<div class ='col-md-12'>
+	<br>
+	<br>
+	<hr>
+	<h3>Parameters (delete this from application.html.erb later!)</h3>
+	<%= params.inspect %>
+</div>
 
 </body>
 </html>

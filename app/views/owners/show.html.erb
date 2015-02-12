@@ -1,15 +1,20 @@
-<h1> <%=@owner.first_name%> <%=@owner.last_name%> details</h1>
+<div class='ownerContainer'>
+	<h1> <%=@owner.first_name%> <%=@owner.last_name%> details</h1>
 
-<p>Owner first name: <%=@owner.first_name%></p>
-<p>Owner last name: <%=@owner.last_name%></p>
-<p>Picture path: <%=@owner.picture_path%></p>
+	<p>Owner first name: <%=@owner.first_name%></p>
+	<p>Owner last name: <%=@owner.last_name%></p>
+	<p>Picture path: <%=@owner.picture_path%></p>
 
-<h3>My dogs!</h3>
-<ul>
-	<% @dogs.each do |dog| %>
-		<li><%= dog.dog_name%></li>
-	<% end %>
-</ul>
+	<p class="btn btn-default btn-lg"><%= link_to 'Edit my details', edit_owner_path(@owner) %>
 
-<p><%= link_to 'Add a new dog', new_dog_path(:owner_id => @owner.id) %></p> <!-- This lets you pass in a parameter of your own naming -->
-<p><%= link_to 'Back to all owners', owners_path%></p>
+	<h3>My dogs!</h3>
+	<ul>
+		<% @dogs.each do |dog| %>
+			<li><%= dog.dog_name%> | <%=link_to 'Edit this dog', edit_dog_path(dog) %></li>
+		<% end %>
+	</ul>
+
+	<p><%= link_to 'Add a new dog', new_dog_path(:owner_id => @owner.id) %></p> <!-- This lets you pass in a parameter of your own naming -->
+	<p><%= link_to 'Back to all owners', owners_path%></p>
+
+</div>

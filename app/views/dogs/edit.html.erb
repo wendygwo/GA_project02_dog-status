@@ -1,22 +1,24 @@
-<h2> Edit this dog's information</h2>
+<div class='dogContainer'>
+	<h2> Edit this dog's information</h2>
 
-<%= form_for @dog do |f| %>
+	<%= form_for @dog do |f| %>
 
-	<p>Name: <%= f.text_field :dog_name %></p>
-	<p>Breed: <%=f.text_field :breed %></p>
-	<p>Birthday: <%=f.date_field :birthday %></p>
-	<p>Food low? <%=f.check_box :food_low_flag %></p> <!-- Shows checkbox based on database value -->
-	<p>Treats low? <%=f.check_box :treats_low_flag %></p> <!-- Shows checkbox based on database value -->
-	<p>Photo location: <%=f.text_field :photo_path %></p>
-	<!-- <p> <%#= f.collection_select %> </p> --> <!-- Question: Somehow show all the owners here and allow editing of owners-->
+		<p>Name: <%= f.text_field :dog_name %></p>
+		<p>Breed: <%=f.text_field :breed %></p>
+		<p>Birthday: <%=f.date_field :birthday %></p>
+		<p>Food low? <%=f.check_box :food_low_flag %></p> <!-- Shows checkbox based on database value -->
+		<p>Treats low? <%=f.check_box :treats_low_flag %></p> <!-- Shows checkbox based on database value -->
+		<p>Photo location: <%=f.text_field :photo_path %></p>
+		<!-- <p> <%#= f.collection_select %> </p> --> <!-- Question: Somehow show all the owners here and allow editing of owners-->
 
-<!-- 	<%#= fields_for :relationships, @dog.relationships do |relat| %>
-		<p> Owner first name: <%#= relat.text_field :owner_id%> </p>
-	<%# end %> -->
+	<!-- 	<%#= fields_for :relationships, @dog.relationships do |relat| %>
+			<p> Owner first name: <%#= relat.text_field :owner_id%> </p>
+		<%# end %> -->
 
-	<%= f.submit 'Edit this dog!' %>
+		<%= f.submit 'Edit this dog!' %>
 
-<% end %>
+	<% end %>
 
-<%= link_to 'Delete this dog', :dog, method: :delete, data: {confirm: 'Are you sure you want to delete this dog?'} %> |
-<%= link_to 'Back to dogs list', dogs_path%>
+	<%= link_to 'Delete this dog', :dog, method: :delete, data: {confirm: 'Are you sure you want to delete this dog?'} %> |
+	<%= link_to 'Back to dogs list', dogs_path%>
+</div>
