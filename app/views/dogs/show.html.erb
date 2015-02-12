@@ -3,8 +3,8 @@
 
 <p>Breed: <%=@dog.breed %></p>
 <p>Birthday: <%=@dog.birthday %></p>
-<p>Food low? <%=@dog.food_low_flag %></p>
-<p>Treats low?  <%=@dog.treats_low_flag %></p>
+<p>Food low checkbox? <%=check_box_tag 'food_low' , 'yes', @dog.food_low_flag, disabled:true %></p>
+<p>Treats low checkbox? <%=check_box_tag 'treats_low' , 'yes', @dog.treats_low_flag, disabled:true %></p>
 <p>Photo location: <%=@dog.photo_path %></p>
 
 

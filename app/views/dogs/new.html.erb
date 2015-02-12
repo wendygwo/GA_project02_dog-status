@@ -8,8 +8,12 @@
 	<p>Food low? <%=f.check_box :food_low_flag %></p> <!-- Shows checkbox based on database value -->
 	<p>Treats low? <%=f.check_box :treats_low_flag %></p> <!-- Shows checkbox based on database value -->
 	<p>Photo location: <%=f.text_field :photo_path %></p>
-	<!-- <p> <%#= f.collection_select %> </p> --> <!-- Question: Somehow show all the owners here and allow editing of owners-->
 
-	<%= f.submit 'Add this dog!' %>
+	<!-- <p>Owner: <%#= @owner %></p> -->
+
+	<!-- Using a hidden field to pass the owner_id! -->
+	<%= f.hidden_field :dog_owner_id, :value => @owner.id %> 
+
+	<%= f.submit 'Add this dog!' %> 
 
 <% end %>

@@ -10,6 +10,10 @@
 	<p>Photo location: <%=f.text_field :photo_path %></p>
 	<!-- <p> <%#= f.collection_select %> </p> --> <!-- Question: Somehow show all the owners here and allow editing of owners-->
 
+<!-- 	<%#= fields_for :relationships, @dog.relationships do |relat| %>
+		<p> Owner first name: <%#= relat.text_field :owner_id%> </p>
+	<%# end %> -->
+
 	<%= f.submit 'Edit this dog!' %>
 
 <% end %>

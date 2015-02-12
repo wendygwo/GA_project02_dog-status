@@ -1,0 +1,30 @@
+<h1>All owners</h1>
+
+<table>
+	<thead>
+		<tr>
+			<th>Owner ID</th>
+			<th>Owner first name</th>
+			<th>Owner second name</th>
+			<th>Picture path</th>
+			<th colspan="3">Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<%@owners.each do |owner| %>
+			<tr>
+				<td><%=owner.id%></td>
+				<td><%=owner.first_name%></td>
+				<td><%=owner.last_name%></td>
+				<td><%=owner.picture_path%></td>
+				<td><%= link_to 'See owner details', owner_path(owner)%></td>
+				<td><%= link_to 'Edit owner details', edit_owner_path(owner)%></td>
+				<td><%= link_to 'Delete this owner', owner, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+			</tr>
+		<% end %>
+	</tbody>
+
+</table>
+
+<%= link_to 'Add new owner', new_owner_path%>
+

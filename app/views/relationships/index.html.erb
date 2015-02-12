@@ -1,0 +1,29 @@
+<h1>Dog and owner relationships</h1>
+
+<table>
+	<thead>
+		<tr>
+			<th>Dog</th>
+			<th>Dog ID</th>
+			<th>Owner</th>
+			<th>Owner ID</th>
+			<th colspan="2">Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @relationships.each do |relationship| %>
+			<tr>
+				<td><%=relationship.dog.dog_name%></td>
+				<td><%=relationship.dog.id%></td>
+				<td><%=relationship.owner.first_name%> <%=relationship.owner.last_name%></td>
+				<td><%=relationship.owner.id%></td>
+				<td><%=link_to 'Delete this relationship', relationship, method: :delete, data: {confirm:'Are you sure you want to delete this relationship?'} %></td>
+			</tr>
+		<% end %>		
+		
+	</tbody>
+</table>
+
+<%= link_to 'Add new relationship', new_relationship_path %>
+
+		

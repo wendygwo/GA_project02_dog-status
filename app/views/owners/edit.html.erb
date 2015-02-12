@@ -1,0 +1,10 @@
+<h1>Edit this owner</h1>
+
+<%= form_for @owner do |f|%>
+
+	<p>First name: <%= f.text_field :first_name %></p>
+	<p>Last name: <%= f.text_field :last_name %></p>
+	<p>Photo location: <%=f.text_field :picture_path %></p>
+
+	<%= f.submit 'Edit this owner' %>
+<% end %>

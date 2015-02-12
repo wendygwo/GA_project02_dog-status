@@ -13,3 +13,23 @@
  *= require_tree .
  *= require_self
  */
+body {
+	/*background-image: url('../images/dog_paw.jpeg');*/
+}
+table{
+	border-collapse: collapse;
+}
+
+table, th, td {
+	border: 2px solid black;
+}
+
+tr:nth-child(even) {
+	background: #CCC
+}
+tr:nth-child(odd){
+		background: #FFF
+}
+thead>tr>th{
+	background-color: lightblue;
+}

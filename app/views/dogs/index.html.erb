@@ -3,6 +3,7 @@
 <table>
 	<thead>
 		<tr>
+			<th>Dog ID</th>
 			<th>Dog name</th>
 			<th>Breed</th>
 			<th>Birthday</th>
@@ -15,13 +16,12 @@
 	<tbody>
 		<% @dogs.each do |dog| %>
 			<tr>
+				<td><%= dog.id %></td>
 				<td><%= dog.dog_name %></td>
 				<td><%= dog.breed %></td>
 				<td><%= dog.birthday %></td>
-				<td><%= dog.food_low_flag %></td> 
-				<!-- <td><%#= check_box dog.food_low_flag %></td> -->
-				<td><%= dog.treats_low_flag %></td> <!-- Question: how do i get the dog index page to show a checkbox that's checked based on flag value in database -->
-				<!-- <td><input type='checkbox'></td> -->
+				<td><%= check_box_tag 'food_low', 'yes', dog.food_low_flag, disabled:true%>
+				<td><%= check_box_tag 'treats_low', 'yes', dog.treats_low_flag, disabled:true%>
 				<td><%= dog.photo_path %></td>
 				<td><%=link_to "See this dog's details", dog_path(dog) %></td>
 				<td><%=link_to 'Edit this dog', edit_dog_path(dog) %></td>

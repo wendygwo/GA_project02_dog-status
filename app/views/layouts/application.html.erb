@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>DogStatus</title>
+  <title>Where My Dogs At?</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -9,6 +9,13 @@
 <body>
 
 <%= yield %>
+
+<br>
+<br>
+<hr>
+<h3>Parameters (delete this from application.html.erb later!)</h3>
+<%= params.inspect %>
+
 
 </body>
 </html>
