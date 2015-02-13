@@ -36,7 +36,7 @@ class DogsController < ApplicationController
 	def update
 		@dog=Dog.find(params[:id])
 		if @dog.update_attributes(params.require(:dog).permit(:dog_name, :breed, :birthday, :food_low_flag, :treats_low_flag, :photo_path))
-			redirect_to dogs_path
+			redirect_to owner_path(id: session['owner_id'])
 		else
 			render 'edit'
 		end
