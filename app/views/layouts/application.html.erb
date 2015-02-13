@@ -27,8 +27,13 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right"> <!-- This part has the links -->
-        <li><a href="#">Edit my profile</a></li>
-        <li><a href="#">Log out</a></li>
+        <% if session['owner_id'] != nil %>
+            <li><%= link_to 'Edit owner details', edit_owner_path(id: session['owner_id'])%></li>
+            <!-- <li><a href="#">Log out</a></li> -->
+            <li><%= link_to 'Log out', logout_path, method: :delete %></li>
+        <%# else %>
+
+        <% end %>
       </ul>
       <!-- This part has the search bar and button -->
 <!--       <form class="navbar-form navbar-left" role="search">

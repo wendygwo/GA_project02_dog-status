@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  root to: 'sessions#new'
+
+
+  
+  delete '/sessions' => 'sessions#destroy', as: 'logout'
+  resources :sessions, only: [:new, :create, :destroy]
+
   resources :dogs
   
   resources :relationships

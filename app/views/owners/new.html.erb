@@ -1,11 +1,13 @@
 <div class='ownerContainer'>
-	<h1>Add new owner</h1>
+	<h1>Sign up as a new owner!</h1>
 
 	<%= form_for @owner do |f|%>
-
+		<p>Username: <%= f.text_field :username %></p>
 		<p>First name: <%= f.text_field :first_name %></p>
 		<p>Last name: <%= f.text_field :last_name %></p>
 		<p>Photo location: <%=f.text_field :picture_path %></p>
+		<p>Password: <%=f.password_field :password %></p>
+		<p>Password confirmation: <%=f.password_field :password_confirmation %></p>
 
 		<%= f.submit 'Add this owner' %>
 	<% end %>

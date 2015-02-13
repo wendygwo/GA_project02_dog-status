@@ -10,11 +10,13 @@ class OwnersController < ApplicationController
 		@owner = Owner.new
 	end
 	def create
-		@owner=Owner.create(params.require(:owner).permit(:first_name, :last_name, :picture_path))
+		@owner=Owner.create(params.require(:owner).permit(:first_name, :last_name, :picture_path,:password)) #added for authentication
 			if @owner.save
-				redirect_to owners_path
+				# redirect_to owners_path
+				redirect_to new_session_path(owner_created: 'true') #added for authentication
 			else
 				render 'new'
+				#to do - need to redirect back to new owner path
 			end
 	end
 	def edit
@@ -22,8 +24,8 @@ class OwnersController < ApplicationController
 	end
 	def update
 		@owner = Owner.find(params[:id])
-		if @owner.update_attributes(params.require(:owner).permit(:first_name, :last_name, :picture_path))
-			redirect_to owners_path
+		if @owner.update_attributes(params.require(:owner).permit(:first_name, :last_name, :picture_path,:password))
+			redirect_to owner_path
 		else
 			render 'edit'
 		end
