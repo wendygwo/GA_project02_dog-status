@@ -1,13 +1,36 @@
+<%# @owner.errors.full_messages.each do |error| %>
+  <!-- <p><%#= error %></p> -->
+<%# end %>
+
+
+
 <div class='ownerContainer'>
 	<h1>Sign up as a new owner!</h1>
 
 	<%= form_for @owner do |f|%>
-		<p>Username: <%= f.text_field :username %></p>
-		<p>First name: <%= f.text_field :first_name %></p>
-		<p>Last name: <%= f.text_field :last_name %></p>
+		<div id='username'
+			<p>Username: <%= f.text_field :username %></p>
+			<!-- Warning for non-unique owner name -->
+			<p class="text-danger"><%=@owner.errors[:username][0]%></p>
+		</div>
+
+			<p>First name: <%= f.text_field :first_name %></p>
+			<!-- Warning for first name -->
+			<p class="text-danger"><%=@owner.errors[:first_name][0]%></p>
+
+			<p>Last name: <%= f.text_field :last_name %></p>
+			<!-- Warning for last name -->
+			<p class="text-danger"><%=@owner.errors[:last_name][0]%></p>
+
 		<p>Photo location: <%=f.text_field :picture_path %></p>
+		
 		<p>Password: <%=f.password_field :password %></p>
+		<!-- Warning for password -->
+		<p class="text-danger"><%=@owner.errors[:password][0]%></p>
+
 		<p>Password confirmation: <%=f.password_field :password_confirmation %></p>
+		<!-- Warning for password -->
+		<p class="text-danger"><%=@owner.errors[:password_confirmation][0]%></p>
 
 		<%= f.submit 'Add this owner' %>
 	<% end %>

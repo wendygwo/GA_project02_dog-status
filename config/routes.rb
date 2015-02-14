@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 
   root to: 'sessions#new'
-
-
   
   delete '/sessions' => 'sessions#destroy', as: 'logout'
+
+  # post '/owners/new' => 'owners#create'
   resources :sessions, only: [:new, :create, :destroy]
 
   resources :dogs

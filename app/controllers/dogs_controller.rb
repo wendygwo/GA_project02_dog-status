@@ -15,16 +15,15 @@ class DogsController < ApplicationController
 
 	def create
 		@dog = Dog.create(params.require(:dog).permit(:dog_name, :breed, :birthday, :food_low_flag, :treats_low_flag, :photo_path))
-     puts '======================================================'
-     puts params.inspect #This will show up on the server outputs. A debugging tool
-     puts params[:dog][:dog_owner_id].inspect
-     puts '======================================================'
-     @owner = Owner.find(params[:dog][:dog_owner_id])
+    @owner = Owner.find(params[:dog][:dog_owner_id])
 		if @dog.save #if everything goes smoothly with saving
-			@dog.relationships.create(owner: @owner) #creates relationship between the current dog and the owner that requested this dog be created
-			redirect_to owner_path(@owner) #redirects to the show page of the owner who requested the dog be added
+			#creates relationship between the current dog and the owner that requested this dog be created
+			@dog.relationships.create(owner: @owner) 
+			#redirects to the show page of the owner who requested the dog be added
+			redirect_to owner_path(@owner) 
 		else
-			render 'new'
+			# render 'new'
+			redirect_to new_owner_path
 		end
 	end
 
@@ -36,7 +35,8 @@ class DogsController < ApplicationController
 	def update
 		@dog=Dog.find(params[:id])
 		if @dog.update_attributes(params.require(:dog).permit(:dog_name, :breed, :birthday, :food_low_flag, :treats_low_flag, :photo_path))
-			redirect_to owner_path(id: session['owner_id'])
+			# redirect_to owner_path(id: session['owner_id'])
+			redirect_to owner_path(current_owner)
 		else
 			render 'edit'
 		end

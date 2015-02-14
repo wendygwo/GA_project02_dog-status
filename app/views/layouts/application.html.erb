@@ -21,7 +21,12 @@
         <span class="icon-bar"></span> <!-- See comment in above line -->
         <span class="icon-bar"></span><!-- See comment in above line -->
       </button>
-      <a class="navbar-brand" href="#">Dogs!</a>
+      <% if session['owner_id'] != nil %>
+        <!-- <a class="navbar-brand" href="#">Dogs!</a> -->
+        <%= link_to 'Dogs!', owner_path(id: session['owner_id']), class:'navbar-brand'%>
+      <% else %>
+        <%= link_to 'Dogs!', new_session_path, class:'navbar-brand'%>
+      <% end %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -29,7 +34,6 @@
       <ul class="nav navbar-nav navbar-right"> <!-- This part has the links -->
         <% if session['owner_id'] != nil %>
             <li><%= link_to 'Edit owner details', edit_owner_path(id: session['owner_id'])%></li>
-            <!-- <li><a href="#">Log out</a></li> -->
             <li><%= link_to 'Log out', logout_path, method: :delete %></li>
         <%# else %>
 

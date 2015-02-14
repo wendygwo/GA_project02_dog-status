@@ -10,14 +10,23 @@ class OwnersController < ApplicationController
 		@owner = Owner.new
 	end
 	def create
-		@owner=Owner.create(params.require(:owner).permit(:first_name, :last_name, :picture_path,:password)) #added for authentication
-			if @owner.save
-				# redirect_to owners_path
-				redirect_to new_session_path(owner_created: 'true') #added for authentication
-			else
-				render 'new'
-				#to do - need to redirect back to new owner path
-			end
+		#added for authentication
+		@owner=Owner.create(params.require(:owner).permit(:first_name, :last_name, :picture_path,:password)) 
+		
+		if @owner.save
+			#redirect to owner show page and create session cookie if user successfully created
+			session['owner_id'] = @owner.id.to_s
+			redirect_to owner_path(@owner)
+		else
+			# redirect_to new_owner_path
+			render 'new'
+			puts '=================================='
+			puts 'Errors'
+			puts @owner.errors
+			puts 'Full error messages'
+			puts @owner.errors.full_messages
+			puts '=================================='
+		end
 	end
 	def edit
 		@owner = Owner.find(params[:id])

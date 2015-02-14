@@ -5,15 +5,23 @@ class SessionsController < ApplicationController
   end
 
   def create
-  	o = Owner.where(username: params[:owner][:username]).first #picking up the username has
-  	if o != nil && o.authenticate(params[:owner][:password])
-  		session['owner_id'] = o.id.to_s
-  		redirect_to owner_path(o)
+    #getting the username information (unique to each user) the user typed in and searching for them in the database
+    c = Owner.where(username: params[:owner][:username]).first 
+    #checking if the user was successfully found based on username entered, and that password matches
+    if c != nil && c.authenticate(params[:owner][:password])
+      session['owner_id'] = c.id.to_s
+      #redirect to owner's show view
+  		redirect_to owner_path(c)
+    else
+      #redirect to new login page
+      render :action => :new
   	end
   end
 
   def destroy
-  	session.destroy
+  	#destroy session cookie
+    session.destroy
+    #redirect to login page
   	redirect_to new_session_path
   end
 end

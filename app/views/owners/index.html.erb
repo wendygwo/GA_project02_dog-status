@@ -1,12 +1,12 @@
 <div class='ownerContainer'>
 	<div class ='col-md-12'><h1>All owners</h1></div>
 
-	<div class ='col-md-4'></div>
-	<div class ='col-md-8'>
+	<div class ='col-md-12'>
 		<table>
 			<thead>
 				<tr>
 					<th>Owner ID</th>
+					<th>Owner username</th>
 					<th>Owner first name</th>
 					<th>Owner second name</th>
 					<th>Picture path</th>
@@ -17,6 +17,7 @@
 				<%@owners.each do |owner| %>
 					<tr>
 						<td><%=owner.id%></td>
+						<td><%=owner.username%></td>
 						<td><%=owner.first_name%></td>
 						<td><%=owner.last_name%></td>
 						<td><%=owner.picture_path%></td>
