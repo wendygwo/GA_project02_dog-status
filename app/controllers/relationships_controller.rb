@@ -1,9 +1,17 @@
 class RelationshipsController < ApplicationController
 	def index
-		@relationships = Relationship.all
+		if current_owner != nil
+			@relationships = Relationship.all
+		else
+			redirect_to new_session_path #redirects user to new session path if no owner is logged in
+		end
 	end
 	def new
-		@relationship = Relationship.new
+		if current_owner != nil
+			@relationship = Relationship.new
+		else
+			redirect_to new_session_path #redirects user to new session path if no owner is logged in
+		end
 	end
 	def create
 		@relationship = Relationship.create(params.require(:relationship).permit(:dog_id, :owner_id))

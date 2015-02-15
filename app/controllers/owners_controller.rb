@@ -1,10 +1,14 @@
 class OwnersController < ApplicationController
 	def index
-		@owners = Owner.all
+			@owners = Owner.all
 	end
 	def show
-		@owner = Owner.find(params[:id])
-		@dogs = @owner.dogs #This finds all the dogs for the current owner
+		if current_owner != nil
+			@owner = Owner.find(params[:id])
+			@dogs = @owner.dogs #This finds all the dogs for the current owner
+		else
+			redirect_to new_session_path #redirects user to new session path if no owner is logged in
+		end
 	end
 	def new
 		@owner = Owner.new
@@ -29,7 +33,11 @@ class OwnersController < ApplicationController
 		end
 	end
 	def edit
-		@owner = Owner.find(params[:id])
+		if current_owner != nil
+			@owner = Owner.find(params[:id])
+		else
+			redirect_to new_session_path
+		end
 	end
 	def update
 		@owner = Owner.find(params[:id])

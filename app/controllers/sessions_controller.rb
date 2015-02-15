@@ -1,8 +1,13 @@
 class SessionsController < ApplicationController
   def new
-  	@owner = Owner.new #Any controller can create something from any other model!
-  	# to do. Copy stuff in from authentication lab with a user_created message
-    @login = true
+    if current_owner != nil
+      redirect_to owner_path(current_owner)
+    else
+    	@owner = Owner.new #Any controller can create something from any other model!
+    	# to do. Copy stuff in from authentication lab with a user_created message
+      @login = true
+    end
+
   end
 
   def create

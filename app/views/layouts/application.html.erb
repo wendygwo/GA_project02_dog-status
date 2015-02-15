@@ -31,21 +31,17 @@
         <span class="icon-bar"></span> <!-- See comment in above line -->
         <span class="icon-bar"></span><!-- See comment in above line -->
       </button>
-      <!-- <div class='brandImage'> -->
-        <% if session['owner_id'] != nil %>
-          <!-- <%#= link_to 'Dogs!', owner_path(current_owner), class:'navbar-brand'%> -->
-          <%= link_to image_tag('dog-house-clipart-black-and-white-dog-house-outline-hi copy 2.png', :class => 'brandImage'), owner_path(current_owner), class:'navbar-brand'%>
-        <% else %>
-          <%= link_to image_tag('dog-house-clipart-black-and-white-dog-house-outline-hi copy 2.png', :class => 'brandImage'), new_session_path, class:'navbar-brand'%>
-        <% end %>
-      <!-- </div>  --><!-- End brandImage div -->
+
+      <%= link_to image_tag('dog-house-clipart-black-and-white-dog-house-outline-hi copy 2.png', :class => 'brandImage'), new_session_path, class:'navbar-brand'%>
+
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right"> <!-- This part has the links -->
         <% if current_owner != nil %>
-            <li><%= link_to 'Edit owner details', edit_owner_path(id: session['owner_id'])%></li>
+            <li><%= link_to current_owner.full_name, owner_path(current_owner)%></li>
+            <li><%= link_to 'Edit profile', edit_owner_path(current_owner)%></li>
             <li><%= link_to 'Log out', logout_path, method: :delete %></li>
         <%# else %>
 

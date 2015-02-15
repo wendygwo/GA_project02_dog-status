@@ -1,16 +1,28 @@
 class DogsController < ApplicationController
 	def index
-		@dogs = Dog.all
+		if current_owner != nil
+			@dogs = Dog.all
+		else
+			redirect_to new_session_path
+		end
 	end
 
 	def show
-		@dog = Dog.find(params[:id])
-		@owners = @dog.owners #This finds all the owners of the current dog
+		if current_owner != nil
+			@dog = Dog.find(params[:id])
+			@owners = @dog.owners #This finds all the owners of the current dog
+		else
+			redirect_to new_session_path
+		end
 	end
 
 	def new
-		@dog=Dog.new
-		@owner = Owner.find(params[:owner_id])
+		if current_owner != nil
+			@dog=Dog.new
+			@owner = Owner.find(params[:owner_id])
+		else
+			redirect_to new_session_path
+		end
 	end
 
 	def create
@@ -28,8 +40,11 @@ class DogsController < ApplicationController
 	end
 
 	def edit
-		@dog=Dog.find(params[:id])
-		# @owners = @dog.owners
+		if current_owner != nil
+			@dog=Dog.find(params[:id])
+		else
+			redirect_to new_session_path
+		end
 	end
 
 	def update
@@ -47,8 +62,4 @@ class DogsController < ApplicationController
 		@dog.destroy
 		redirect_to owner_path(current_owner)
 	end
-
-	# def dog_params
- #    params.require(:dog).(:name,:breed)
-	# end	
 end

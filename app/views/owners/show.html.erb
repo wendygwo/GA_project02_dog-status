@@ -1,34 +1,43 @@
 <div class='ownerContainer'>
-	<h1> Welcome <%=@owner.first_name%> <%=@owner.last_name%>!</h1>
-
-	<h3>My dogs!</h3>
+	
 
 	<div class='container-fluid'>
-		<div class='col-xs-2'></div>
-		<div class='col-xs-8'>
-			<table>	
-				<thead>
-					<th>Dog picture</th>
-					<th>Name</th>
-					<th>Food low?</th>
-					<th>Treats low?</th>
-					<th colspan="2">Actions</th>
-				</thead>
-				<tbody>
-					<% @dogs.each do |dog| %>
-						<tr>
-							<td>TO DO: DOG PICTURE</td>
-							<td><%= dog.dog_name%></td>
-							<td><%= check_box_tag 'food_low', 'yes', dog.food_low_flag, disabled:true%></td>
-							<td><%= check_box_tag 'treats_low', 'yes',dog.treats_low_flag, disabled:true%></td>
-							<td><%=link_to "Edit status", edit_dog_path(dog) %></td>
-							<td><%=link_to "See details", dog_path(dog) %></td>
-						</tr>
-					<% end %>
-				</tbody>
-			</table>
+
+		<div class='row'>
+			<div class='col-sm-2'></div>
+			<div class='col-sm-8'>
+				<h1> Welcome to your doggie dashboard!</h1>
+			</div>
+			<div class='col-sm-2'></div>
 		</div>
-		<div class='col-xs-2'></div>
+
+		<div class='row'>
+			<div class='col-sm-2'></div>
+			<div class='col-sm-8'>
+				<table>	
+					<thead>
+						<th>TO DO: Dog picture</th>
+						<th>Name</th>
+						<th>Food low?</th>
+						<th>Treats low?</th>
+						<th colspan="2">Actions</th>
+					</thead>
+					<tbody>
+						<% @dogs.each do |dog| %>
+							<tr>
+								<td></td>
+								<td><%= dog.dog_name%></td>
+								<td><%= check_box_tag 'food_low', 'yes', dog.food_low_flag, disabled:true%></td>
+								<td><%= check_box_tag 'treats_low', 'yes',dog.treats_low_flag, disabled:true%></td>
+								<td><%=link_to "Edit status", edit_dog_path(dog) %></td>
+								<td><%=link_to "See details", dog_path(dog) %></td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+			<div class='col-sm-2'></div>
+		</div>
 	</div>
 
 	<p><%= link_to 'Add a new dog', new_dog_path(:owner_id => @owner.id) %></p> <!-- This lets you pass in a parameter of your own naming -->
