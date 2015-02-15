@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
   def new
   	@owner = Owner.new #Any controller can create something from any other model!
   	# to do. Copy stuff in from authentication lab with a user_created message
+    @login = true
   end
 
   def create

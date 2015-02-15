@@ -22,8 +22,8 @@ class DogsController < ApplicationController
 			#redirects to the show page of the owner who requested the dog be added
 			redirect_to owner_path(@owner) 
 		else
-			# render 'new'
-			redirect_to new_owner_path
+		  render 'edit'
+			#redirect_to new_owner_path
 		end
 	end
 
@@ -35,7 +35,7 @@ class DogsController < ApplicationController
 	def update
 		@dog=Dog.find(params[:id])
 		if @dog.update_attributes(params.require(:dog).permit(:dog_name, :breed, :birthday, :food_low_flag, :treats_low_flag, :photo_path))
-			# redirect_to owner_path(id: session['owner_id'])
+			# send back to owner's show page
 			redirect_to owner_path(current_owner)
 		else
 			render 'edit'
@@ -45,7 +45,7 @@ class DogsController < ApplicationController
 	def destroy
 		@dog = Dog.find(params[:id])
 		@dog.destroy
-		redirect_to dogs_path
+		redirect_to owner_path(current_owner)
 	end
 
 	# def dog_params

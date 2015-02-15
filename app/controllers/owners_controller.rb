@@ -20,12 +20,12 @@ class OwnersController < ApplicationController
 		else
 			# redirect_to new_owner_path
 			render 'new'
-			puts '=================================='
-			puts 'Errors'
-			puts @owner.errors
-			puts 'Full error messages'
-			puts @owner.errors.full_messages
-			puts '=================================='
+			# puts '=================================='
+			# puts 'Errors'
+			# puts @owner.errors
+			# puts 'Full error messages'
+			# puts @owner.errors.full_messages
+			# puts '=================================='
 		end
 	end
 	def edit
@@ -33,7 +33,7 @@ class OwnersController < ApplicationController
 	end
 	def update
 		@owner = Owner.find(params[:id])
-		if @owner.update_attributes(params.require(:owner).permit(:first_name, :last_name, :picture_path,:password))
+		if @owner.update_attributes(params.require(:owner).permit(:username, :first_name, :last_name, :picture_path,:password))
 			redirect_to owner_path
 		else
 			render 'edit'

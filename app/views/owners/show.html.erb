@@ -1,18 +1,35 @@
 <div class='ownerContainer'>
-	<h1> <%=@owner.first_name%> <%=@owner.last_name%> details</h1>
-
-	<p>Owner first name: <%=@owner.first_name%></p>
-	<p>Owner last name: <%=@owner.last_name%></p>
-	<p>Picture path: <%=@owner.picture_path%></p>
-
-	<p class="btn btn-default btn-lg"><%= link_to 'Edit my details', edit_owner_path(@owner) %>
+	<h1> Welcome <%=@owner.first_name%> <%=@owner.last_name%>!</h1>
 
 	<h3>My dogs!</h3>
-	<ul>
-		<% @dogs.each do |dog| %>
-			<li><%= dog.dog_name%> | <%=link_to 'Edit this dog', edit_dog_path(dog) %></li>
-		<% end %>
-	</ul>
+
+	<div class='container-fluid'>
+		<div class='col-xs-2'></div>
+		<div class='col-xs-8'>
+			<table>	
+				<thead>
+					<th>Dog picture</th>
+					<th>Name</th>
+					<th>Food low?</th>
+					<th>Treats low?</th>
+					<th colspan="2">Actions</th>
+				</thead>
+				<tbody>
+					<% @dogs.each do |dog| %>
+						<tr>
+							<td>TO DO: DOG PICTURE</td>
+							<td><%= dog.dog_name%></td>
+							<td><%= check_box_tag 'food_low', 'yes', dog.food_low_flag, disabled:true%></td>
+							<td><%= check_box_tag 'treats_low', 'yes',dog.treats_low_flag, disabled:true%></td>
+							<td><%=link_to "Edit status", edit_dog_path(dog) %></td>
+							<td><%=link_to "See details", dog_path(dog) %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+		<div class='col-xs-2'></div>
+	</div>
 
 	<p><%= link_to 'Add a new dog', new_dog_path(:owner_id => @owner.id) %></p> <!-- This lets you pass in a parameter of your own naming -->
 	<p><%= link_to 'Back to all owners', owners_path%></p>
