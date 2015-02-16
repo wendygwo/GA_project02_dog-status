@@ -2,6 +2,9 @@ class RelationshipsController < ApplicationController
 	def index
 		if current_owner != nil
 			@relationships = Relationship.all
+     puts '=================='
+     puts @relationships
+     puts '=================='
 		else
 			redirect_to new_session_path #redirects user to new session path if no owner is logged in
 		end
@@ -14,6 +17,9 @@ class RelationshipsController < ApplicationController
 		end
 	end
 	def create
+		# puts '======================================================'
+		# raise params.inspect
+		# puts '======================================================'
 		@relationship = Relationship.create(params.require(:relationship).permit(:dog_id, :owner_id))
 		if @relationship.save
 			redirect_to relationships_path

@@ -15,7 +15,7 @@ class OwnersController < ApplicationController
 	end
 	def create
 		#added for authentication
-		@owner=Owner.create(params.require(:owner).permit(:first_name, :last_name, :picture_path,:password)) 
+		@owner=Owner.create(params.require(:owner).permit(:username, :first_name, :last_name,:password,:image)) 
 		
 		if @owner.save
 			#redirect to owner show page and create session cookie if user successfully created
@@ -41,8 +41,8 @@ class OwnersController < ApplicationController
 	end
 	def update
 		@owner = Owner.find(params[:id])
-		if @owner.update_attributes(params.require(:owner).permit(:username, :first_name, :last_name, :picture_path,:password))
-			redirect_to owner_path
+		if @owner.update_attributes(params.require(:owner).permit(:username, :first_name, :last_name,:password,:image))
+			redirect_to owner_path(current_owner)
 		else
 			render 'edit'
 		end

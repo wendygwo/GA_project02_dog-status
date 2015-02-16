@@ -23,7 +23,7 @@
 					<td><%= dog.birthday %></td>
 					<td><%= check_box_tag 'food_low', 'yes', dog.food_low_flag, disabled:true%>
 					<td><%= check_box_tag 'treats_low', 'yes', dog.treats_low_flag, disabled:true%>
-					<td><%= dog.photo_path %></td>
+					<td><%= image_tag dog.image.url(:thumb) %></td>
 					<td><%=link_to "See this dog's details", dog_path(dog) %></td>
 					<td><%=link_to 'Edit this dog', edit_dog_path(dog) %></td>
 					<td><%=link_to 'Delete this dog', dog, method: :delete, data: {confirm: 'Are you sure you want to delete this dog?'} %></td>

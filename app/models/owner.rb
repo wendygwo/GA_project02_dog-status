@@ -4,6 +4,9 @@ class Owner < ActiveRecord::Base
 	has_many :dogs, through: :relationships
 	has_secure_password #made available from the bcrypt gem
 
+	has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
+validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+
 	# validates_uniqueness_of :username, message:'This username is already taken'
 	# validates_presence_of :first_name, message:'First name is required'
 	# validates_presence_of :last_name, message:'Last name is required'

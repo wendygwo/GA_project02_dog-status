@@ -26,7 +26,7 @@ class DogsController < ApplicationController
 	end
 
 	def create
-		@dog = Dog.create(params.require(:dog).permit(:dog_name, :breed, :birthday, :food_low_flag, :treats_low_flag, :photo_path))
+		@dog = Dog.create(params.require(:dog).permit(:dog_name, :breed, :birthday, :food_low_flag, :treats_low_flag, :image))
     @owner = Owner.find(params[:dog][:dog_owner_id])
 		if @dog.save #if everything goes smoothly with saving
 			#creates relationship between the current dog and the owner that requested this dog be created
@@ -49,7 +49,7 @@ class DogsController < ApplicationController
 
 	def update
 		@dog=Dog.find(params[:id])
-		if @dog.update_attributes(params.require(:dog).permit(:dog_name, :breed, :birthday, :food_low_flag, :treats_low_flag, :photo_path))
+		if @dog.update_attributes(params.require(:dog).permit(:dog_name, :breed, :birthday, :food_low_flag, :treats_low_flag, :image))
 			# send back to owner's show page
 			redirect_to owner_path(current_owner)
 		else

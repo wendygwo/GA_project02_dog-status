@@ -8,7 +8,8 @@
 		<p>Birthday: <%=f.date_field :birthday %></p>
 		<p>Food low? <%=f.check_box :food_low_flag %></p> <!-- Shows checkbox based on database value -->
 		<p>Treats low? <%=f.check_box :treats_low_flag %></p> <!-- Shows checkbox based on database value -->
-		<p>Photo location: <%=f.text_field :photo_path %></p>
+		<p>Profile picture: </p>
+		<p><%=f.file_field :image, class:'text-center' %> </p><br />
 
 		<!-- <p>Owner: <%#= @owner %></p> -->
 

@@ -1,6 +1,4 @@
 <div class='ownerContainer'>
-	
-
 	<div class='container-fluid'>
 
 		<div class='row'>
@@ -10,13 +8,24 @@
 			</div>
 			<div class='col-sm-2'></div>
 		</div>
+		<!-- Only show the picture if there's one uploaded. 
+		Without the if statement, a broken picture link shows up -->
+		<% if @owner.image_file_name != nil%>
+			<div class="row">
+				<div class='col-sm-2'></div>
+				<div class='col-sm-8'>
+					<%= image_tag @owner.image.url(:thumb) %>
+				</div>
+				<div class='col-sm-2'></div>
+			</div>
+		<% end %>
 
 		<div class='row'>
-			<div class='col-sm-2'></div>
-			<div class='col-sm-8'>
+			<div class='col-sm-1'></div>
+			<div class='col-sm-10'>
 				<table>	
 					<thead>
-						<th>TO DO: Dog picture</th>
+						<th></th>
 						<th>Name</th>
 						<th>Food low?</th>
 						<th>Treats low?</th>
@@ -25,7 +34,7 @@
 					<tbody>
 						<% @dogs.each do |dog| %>
 							<tr>
-								<td></td>
+								<td><%= image_tag dog.image.url(:thumb)%></td>
 								<td><%= dog.dog_name%></td>
 								<td><%= check_box_tag 'food_low', 'yes', dog.food_low_flag, disabled:true%></td>
 								<td><%= check_box_tag 'treats_low', 'yes',dog.treats_low_flag, disabled:true%></td>
@@ -36,7 +45,7 @@
 					</tbody>
 				</table>
 			</div>
-			<div class='col-sm-2'></div>
+			<div class='col-sm-1'></div>
 		</div>
 	</div>
 
