@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150215221213) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "dogs", force: true do |t|
     t.string   "dog_name"
     t.string   "breed"
@@ -47,7 +50,7 @@ ActiveRecord::Schema.define(version: 20150215221213) do
     t.datetime "updated_at"
   end
 
-  add_index "relationships", ["dog_id"], name: "index_relationships_on_dog_id"
-  add_index "relationships", ["owner_id"], name: "index_relationships_on_owner_id"
+  add_index "relationships", ["dog_id"], name: "index_relationships_on_dog_id", using: :btree
+  add_index "relationships", ["owner_id"], name: "index_relationships_on_owner_id", using: :btree
 
 end
