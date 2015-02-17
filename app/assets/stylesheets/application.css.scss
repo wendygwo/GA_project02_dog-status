@@ -27,9 +27,9 @@ $mainfont: 'Crafty Girls', cursive;
 	font-family: $mainfont;
 }
 .login {
-	// background-image: url('black_lab_puppy.jpg');
+	background-image: url('black_lab_puppy.jpg');
 	// background-image: url('<%= asset_path("black_lab_puppy.jpg") %>');
-	background-image: asset-url('black_lab_puppy.jpg');
+	// background-image: asset-url('black_lab_puppy.jpg');
 	background-size: cover;
 	color: white;
 	font-family: $mainfont;
