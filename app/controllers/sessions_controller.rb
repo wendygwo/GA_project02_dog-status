@@ -19,8 +19,10 @@ class SessionsController < ApplicationController
       #redirect to owner's show view
   		redirect_to owner_path(c)
     else
-      #redirect to new login page
-      render :action => :new
+      # redirect to new login page
+      # TO DO: should probably put error message if they're not able to log in
+      # redirect_to new_session_path
+      redirect_to new_session_path(:error_message => 'Incorrect password or username')
   	end
   end
 

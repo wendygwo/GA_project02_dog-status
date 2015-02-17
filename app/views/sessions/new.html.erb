@@ -1,9 +1,21 @@
+
+
+
 <div class="container-fluid">
 	<%= form_for @owner, :url => { :controller => "sessions", :action => "create" } do |f| %> <!-- See the comment under the f.submit line for details. the url tells it to go to the sessions path, create method instead-->
 		<div class="row">
 			<div class='col-xs-12 text-center'>
 				<h1>Log-in!</h1>	
 			</div>
+		</div>
+
+		<!-- This will give you an error message if you tried to log with the wrong password or username -->
+		<div class="row">
+			<div class='col-xs-12 text-center'>
+				<%if params[:error_message] != nil %>
+					<p class="text-danger"><%= params[:error_message] %></p>
+				<% end %> 
+				</div>
 		</div>
 		<div class="row">
 			<div class='col-xs-2'></div>

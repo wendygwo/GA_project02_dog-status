@@ -9,14 +9,19 @@
 
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 </head>
+
 <!-- The ERB for the class below will apply a certain background image if login, or dog or owner is true -->
 <% if @login %>
-  <!-- <body class="<%= @login ? 'login' : ''%>"> -->
+  <!-- <body class="<%#= @login ? 'login' : ''%>"> -->
   <body class='login'>
 <%elsif @dog%>
   <body class='dogContainer'>
 <%elsif @owner %>
-  <body class='ownerContainer'>
+  <% if (params[:controller]=='owners' && params[:action] != 'new') %>
+    <body class='ownerContainer'>
+  <% else %>
+    <body class='newOwnerSignup'>
+  <% end %>
 <% else %>
   <body>
 <% end%>

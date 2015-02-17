@@ -3,6 +3,7 @@
 <table>
 	<thead>
 		<tr>
+			<th>Relationship ID</th>
 			<th>Dog</th>
 			<th>Dog ID</th>
 			<th>Owner</th>
@@ -13,11 +14,12 @@
 	<tbody>
 		<% @relationships.each do |relationship| %>
 			<tr>
+				<td><%=relationship.id%></td>
 				<td><%=relationship.dog.dog_name%></td>
 				<td><%=relationship.dog.id%></td>
 				<td><%=relationship.owner.first_name%> <%=relationship.owner.last_name%></td>
 				<td><%=relationship.owner.id%></td>
-				<td><%=link_to 'Delete this relationship', relationship, method: :delete, data: {confirm:'Are you sure you want to delete this relationship?'} %></td>
+				<!-- <td><%#=link_to 'Delete this relationship', relationship_path(owner_id: relationship.owner.id, dog_id: relationship.dog.id), method: :delete %></td> -->
 			</tr>
 		<% end %>		
 		
