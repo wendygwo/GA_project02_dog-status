@@ -46,6 +46,8 @@ gem "paperclip", "~> 4.2"
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+# gem 'better_errors'
+
 group :production do
 	gem 'rails_12factor'
 end

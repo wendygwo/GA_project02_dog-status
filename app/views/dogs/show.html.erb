@@ -41,7 +41,7 @@
 						<tr>
 							<td><%= image_tag owner.image.url(:thumb)%></td>
 							<td><%= owner.full_name%></td>
-							<td><%=link_to "See owner details", dog_path(owner) %></td>
+							<td><%=link_to "See owner details", owner_path(owner) %></td>
 						</tr>
 					<% end %>
 				</tbody>
