@@ -13,11 +13,21 @@ class RelationshipsController < ApplicationController
 	def new
 		if current_owner != nil
 			@relationship = Relationship.new
-			# Saves owner id of all the owners of current dog in an array
-			@existing_owners_array = Relationship.where(dog_id: params[:dog_id]).pluck('owner_id')
-			# Finds all owners that are not part of the existing owners array, that we found above
-			# This is what the collection select will be on
-			@users_not_already_owners = Owner.where.not(id: @existing_owners_array)
+
+			#Find all dogs to select from, if you're coming from the relationship page, which means there won't be a dog id in the params
+			if params[:dog_id] == nil
+				@dog_select = Dog.all
+				@users_not_already_owners = Owner.all
+			else #otherwise only show the dog you're current coming from (assuming it's the show page)
+				# raise params.inspect
+				@dog_select = Dog.where(id: params[:dog_id])
+				# Saves owner id of all the owners of current dog in an array
+				@existing_owners_array = Relationship.where(dog_id: params[:dog_id]).pluck('owner_id')
+				# Finds all owners that are not part of the existing owners array, that we found above
+				# This is what the collection select will be on
+				@users_not_already_owners = Owner.where.not(id: @existing_owners_array)
+			end
+			
 			 
 		else
 			redirect_to new_session_path #redirects user to new session path if no owner is logged in
@@ -36,7 +46,7 @@ class RelationshipsController < ApplicationController
 		# puts '======================================================'
 		@relationship = Relationship.create(params.require(:relationship).permit(:dog_id, :owner_id, :is_dog_admin))
 		if @relationship.save
-			redirect_to dog_path(params[:dog_id])
+			redirect_to dog_path(@relationship.dog)
 		else
 			render 'new'
 		end

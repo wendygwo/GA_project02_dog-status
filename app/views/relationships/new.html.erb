@@ -1,9 +1,9 @@
 <h1>Add a new owner relationship </h1>
 
 <%=form_for @relationship do |f|%>
-	<p>Dog: <%=f.collection_select :dog_id, Dog.where(id: params[:dog_id]), :id, :dog_name %></p>
-	<!-- Dog.where(id: 1) -->
-	<!-- Dog.all -->
+	<!-- Only show current dog from the collection select -->
+	<p>Dog: <%=f.collection_select :dog_id, @dog_select, :id, :dog_name %></p>
+	<!-- Only show owners that aren't already owners of this dog -->
 	<p>Owner: <%=f.collection_select :owner_id, @users_not_already_owners, :id, :full_name %></p>
 
 	<p>Is dog admin: <%=f.check_box :is_dog_admin %></p>

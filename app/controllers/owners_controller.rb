@@ -36,7 +36,7 @@ class OwnersController < ApplicationController
 	end
 	def edit
 		if current_owner != nil
-			@owner = Owner.find(params[:id])
+			@owner = Owner.where(id: params[:id]).first
 		else
 			redirect_to new_session_path
 		end

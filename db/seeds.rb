@@ -11,7 +11,7 @@ Dog.destroy_all
 
 admin = Owner.create(username: 'admin',first_name: 'admin', last_name:'admin', password: 'password', is_site_admin: true)
 
-owner1 = Owner.create(username: 'fredflintstone',first_name: 'Wilma', last_name:'Flintstone', password: 'password', is_site_admin: false)
+owner1 = Owner.create(username: 'fredflintstone',first_name: 'Fred', last_name:'Flintstone', password: 'password', is_site_admin: false)
 owner12 = Owner.create(username: 'wilmaflintstone',first_name: 'Wilma', last_name:'Flintstone', password: 'password', is_site_admin: true)
 dog1 =  Dog.create(dog_name: 'Dino', breed:'dinosaur', birthday:'2010-01-01',food_low_flag:false,treats_low_flag:false)
 owner1.relationships.create(dog: dog1, is_dog_admin:true)
