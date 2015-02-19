@@ -30,7 +30,8 @@ class DogsController < ApplicationController
     @owner = Owner.find(params[:dog][:dog_owner_id])
 		if @dog.save #if everything goes smoothly with saving
 			#creates relationship between the current dog and the owner that requested this dog be created
-			@dog.relationships.create(owner: @owner) 
+			#Automatically makes the owner who added this relationship as a dog_admin
+			@dog.relationships.create(owner: @owner, is_dog_admin:true) 
 			#redirects to the show page of the owner who requested the dog be added
 			redirect_to owner_path(@owner) 
 		else

@@ -1,7 +1,7 @@
 class RelationshipsController < ApplicationController
 	def index
 		if current_owner != nil
-			@relationships = Relationship.all
+			@relationships = Relationship.order("created_at ASC").all
      # puts '=================='
      # puts 'Relationships in relationships#index'
      # puts @relationships
@@ -23,13 +23,32 @@ class RelationshipsController < ApplicationController
 			redirect_to new_session_path #redirects user to new session path if no owner is logged in
 		end
 	end
+	def edit
+		if current_owner != nil
+			@relationship = Relationship.find(params[:id])
+		else
+			redirect_to new_session_path #redirects user to new session path if no owner is logged in
+		end
+	end
 	def create
 		# puts '======================================================'
 		# raise params.inspect
 		# puts '======================================================'
-		@relationship = Relationship.create(params.require(:relationship).permit(:dog_id, :owner_id))
+		@relationship = Relationship.create(params.require(:relationship).permit(:dog_id, :owner_id, :is_dog_admin))
 		if @relationship.save
 			redirect_to dog_path(params[:dog_id])
+		else
+			render 'new'
+		end
+	end
+	def update
+		# puts '======================================================'
+		# raise params.inspect
+		# puts '======================================================'
+		@relationship = Relationship.find(params[:id])
+		#For update, I'm only letting them update the is dog admin part. I don't want to remove a relationship unless it's from the dog_show page
+		if @relationship.update_attributes(params.require(:relationship).permit(:is_dog_admin))
+			redirect_to relationships_path
 		else
 			render 'new'
 		end

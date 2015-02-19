@@ -8,6 +8,7 @@
 			<th>Dog ID</th>
 			<th>Owner</th>
 			<th>Owner ID</th>
+			<th>Dog admin?</th>
 			<th colspan="2">Actions</th>
 		</tr>
 	</thead>
@@ -19,6 +20,8 @@
 				<td><%=relationship.dog.id%></td>
 				<td><%=relationship.owner.first_name%> <%=relationship.owner.last_name%></td>
 				<td><%=relationship.owner.id%></td>
+				<td><%=check_box_tag 'is_dog_admin', 'yes', relationship.is_dog_admin%></td>
+				<td><%= link_to 'Edit this relationship', edit_relationship_path(relationship) %>
 				<!-- <td><%#=link_to 'Delete this relationship', relationship_path(owner_id: relationship.owner.id, dog_id: relationship.dog.id), method: :delete %></td> -->
 			</tr>
 		<% end %>		
