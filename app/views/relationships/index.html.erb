@@ -1,44 +1,43 @@
 <!-- Only let site admins view this page -->
 <% if !is_current_owner_site_admin %>
-	<!-- Shows an error message if you aren't a site admin -->
-	<h1 class='text-danger'>You can't view this page because you aren't a site admin</h1>
-	<%=link_to 'Click here to go back to your doggie dashboard', owner_path(current_owner) %>
+<!-- Shows an error message if you aren't a site admin -->
+<h1 class='text-danger'>You can't view this page because you aren't a site admin</h1>
+<%=link_to 'Click here to go back to your doggie dashboard', owner_path(current_owner) %>
 <% else %>
-	<!-- Shows you the page if you are a site admin -->
-	<h1 class='text-success'>You are able to view this page because you are a site admin</h1>
-	
-	<h1>Dog and owner relationships</h1>
+<!-- Shows you the page if you are a site admin -->
+<h1 class='text-success'>You are able to view this page because you are a site admin</h1>
 
-	<table>
-		<thead>
+<h1>Dog and owner relationships</h1>
+
+<table>
+	<thead>
+		<tr>
+			<th>Relationship ID</th>
+			<th>Dog</th>
+			<th>Dog ID</th>
+			<th>Owner</th>
+			<th>Owner ID</th>
+			<th>Dog admin?</th>
+			<th colspan="2">Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @relationships.each do |relationship| %>
 			<tr>
-				<th>Relationship ID</th>
-				<th>Dog</th>
-				<th>Dog ID</th>
-				<th>Owner</th>
-				<th>Owner ID</th>
-				<th>Dog admin?</th>
-				<th colspan="2">Actions</th>
+				<td><%=relationship.id%></td>
+				<td><%=relationship.dog.dog_name%></td>
+				<td><%=relationship.dog.id%></td>
+				<td><%=relationship.owner.first_name%> <%=relationship.owner.last_name%></td>
+				<td><%=relationship.owner.id%></td>
+				<td><%=check_box_tag 'is_dog_admin', 'yes', relationship.is_dog_admin, disabled:true%></td>
+				<td><%= link_to 'Edit dog admin status', edit_relationship_path(relationship) %></td>
+				<!-- <td><%#=link_to 'Delete this relationship', relationship_path(owner_id: relationship.owner.id, dog_id: relationship.dog.id), method: :delete %></td> -->
 			</tr>
-		</thead>
-		<tbody>
-			<% @relationships.each do |relationship| %>
-				<tr>
-					<td><%=relationship.id%></td>
-					<td><%=relationship.dog.dog_name%></td>
-					<td><%=relationship.dog.id%></td>
-					<td><%=relationship.owner.first_name%> <%=relationship.owner.last_name%></td>
-					<td><%=relationship.owner.id%></td>
-					<td><%=check_box_tag 'is_dog_admin', 'yes', relationship.is_dog_admin%></td>
-					<td><%= link_to 'Edit this relationship', edit_relationship_path(relationship) %></td>
-					<!-- <td><%#=link_to 'Delete this relationship', relationship_path(owner_id: relationship.owner.id, dog_id: relationship.dog.id), method: :delete %></td> -->
-				</tr>
-			<% end %>		
-			
-		</tbody>
-	</table>
+		<% end %>		
+		
+	</tbody>
+</table>
 
-	<%= link_to 'Add new relationship', new_relationship_path %>
+<%= link_to 'Add new relationship', new_relationship_path %>
 
 <% end %>
-		

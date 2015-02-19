@@ -34,7 +34,7 @@ $mainfont: 'Crafty Girls', cursive;
 	color: white;
 	font-family: $mainfont;
 }
-.ownerContainer, .dogContainer{
+.ownerContainer, .dogContainer, .relationshipContainer{
 	font-family: $mainfont;
 	background-image: asset-url('pawprintbackground.jpeg');
 	// background-image: url('pawprintbackground.jpeg');

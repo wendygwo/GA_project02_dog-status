@@ -23,7 +23,7 @@
 	***======================================================================================================*** <br />
 	<p>Parameters passed from dog controller, show method. Delete later!!!</p>
 	<p>is_dog_admin: <%= @is_dog_admin %></p>
-	<p>is_site_admin:	<%= @is_site_admin %></p>
+	<p>is_site_admin:	<%= is_current_owner_site_admin %></p>
 	***======================================================================================================*** <br />
 		<!-- Loop to show all owners for this dog -->
 	<div class='row'>
@@ -45,14 +45,17 @@
 							<td><%=link_to "See owner details", owner_path(owner) %></td>
 
 							<!-- This creates dynamic info about if the owner on this row is a dog admin and allows you to change that if logged in user is a dog admin -->
-							<td><%= owner.full_name%> currently is 
-								<% if !current_relationship.is_dog_admin %>
-									not
+								<% if is_current_owner_site_admin || @is_dog_admin%>
+									<td>Is 
+										<% if !current_relationship.is_dog_admin %>
+											not
+										<% end %>
+										a dog admin. <br />
+
+										<!-- Give a link to edit dog admin status-->
+										Click <%=link_to "here", edit_relationship_path(current_relationship) %> 	to edit this.
+									</td>
 								<% end %>
-								a dog admin. <br />
-								Click 
-								<%=link_to "here", edit_relationship_path(current_relationship) %>
-								to change this.</td>
 						</tr>
 					<% end %>
 				</tbody>
@@ -71,8 +74,12 @@
 	</div>
 </div><!--  End fluid container div -->
 
-			<br />
+<br />
+<% if is_current_owner_site_admin || @is_dog_admin%>
+	<%= link_to 'Add new owner(s) for this dog', new_relationship_path(dog_id: @dog.id) %> <br />
+	<br />
+	<!-- TO DO: need to delete all relationships linked to this dog, in addition to deleting the dog-->
+	<%= link_to 'Delete this dog', :dog, method: :delete, data: {confirm: 'Are you sure you want to delete this dog?'} %> 
+<% end %>
 
-		<%= link_to 'Add new owner(s) for this dog - ONLY LET DOG ADMINS SEE THIS', new_relationship_path(dog_id: @dog.id) %> <br />
-		<br />
-		<%= link_to 'Delete this dog', :dog, method: :delete, data: {confirm: 'Are you sure you want to delete this dog?'} %> 
+

@@ -14,14 +14,16 @@
 <% if @login %>
   <!-- <body class="<%#= @login ? 'login' : ''%>"> -->
   <body class='login'>
-<%elsif @dog%>
+<% elsif @dog || @dogs %>
   <body class='dogContainer'>
-<%elsif @owner %>
+<% elsif @owner || @owners %>
   <% if (params[:controller]=='owners' && params[:action] != 'new') %>
     <body class='ownerContainer'>
   <% else %>
     <body class='newOwnerSignup'>
   <% end %>
+<% elsif @relationships || @relationship %>
+  <body class='relationshipContainer'>
 <% else %>
   <body>
 <% end%>
