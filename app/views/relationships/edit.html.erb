@@ -1,10 +1,10 @@
-<h1>Edit owner/dog relationship</h1>
-
-<%=form_for @relationship do |f|%>
-	<p>Dog: <%=@relationship.dog.dog_name %></p>
+<h1>Edit dog admin status for:</h1>
 
 	<p>Owner: <%=@relationship.owner.full_name %></p>
 
-	<p>Is dog admin: <%=f.check_box :is_dog_admin %></p>
+	<p>Dog: <%=@relationship.dog.dog_name %></p>
+
+<%=form_for @relationship do |f|%>
+	<p>Dog admin: <%=f.check_box :is_dog_admin %></p>
 	<%=f.submit 'Update this relationship' %>
 <% end %>

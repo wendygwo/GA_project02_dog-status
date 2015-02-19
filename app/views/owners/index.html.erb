@@ -1,36 +1,45 @@
-<div class='ownerContainer'>
-	<div class ='col-md-12'><h1>All owners</h1></div>
+<% if !is_current_owner_site_admin %>
+	<!-- Shows an error message if you aren't a site admin -->
+	<h1 class='text-danger'>You can't view this page because you aren't a site admin</h1>
+	<%=link_to 'Click here to go back to your doggie dashboard', owner_path(current_owner) %>
+<% else %>
+	<!-- Shows you the page if you are a site admin -->
+	<h1 class='text-success'>You are able to view this page because you are a site admin</h1>
 
-	<div class ='col-md-12'>
-		<table>
-			<thead>
-				<tr>
-					<th>Owner ID</th>
-					<th>Owner username</th>
-					<th>Owner first name</th>
-					<th>Owner second name</th>
-					<th>Picture</th>
-					<th colspan="3">Actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%@owners.each do |owner| %>
+		<div class='ownerContainer'>
+		<div class ='col-md-12'><h1>All owners</h1></div>
+
+		<div class ='col-md-12'>
+			<table>
+				<thead>
 					<tr>
-						<td><%=owner.id%></td>
-						<td><%=owner.username%></td>
-						<td><%=owner.first_name%></td>
-						<td><%=owner.last_name%></td>
-						<td><%=image_tag owner.image.url(:thumb)%></td>
-						<td><%= link_to 'See owner details', owner_path(owner)%></td>
-						<td><%= link_to 'Edit owner details', edit_owner_path(owner)%></td>
-						<td><%= link_to 'Delete this owner', owner, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+						<th>Owner ID</th>
+						<th>Owner username</th>
+						<th>Owner first name</th>
+						<th>Owner second name</th>
+						<th>Picture</th>
+						<th colspan="3">Actions</th>
 					</tr>
-				<% end %>
-			</tbody>
+				</thead>
+				<tbody>
+					<%@owners.each do |owner| %>
+						<tr>
+							<td><%=owner.id%></td>
+							<td><%=owner.username%></td>
+							<td><%=owner.first_name%></td>
+							<td><%=owner.last_name%></td>
+							<td><%=image_tag owner.image.url(:thumb)%></td>
+							<td><%= link_to 'See owner details', owner_path(owner)%></td>
+							<td><%= link_to 'Edit owner details', edit_owner_path(owner)%></td>
+							<td><%= link_to 'Delete this owner', owner, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+						</tr>
+					<% end %>
+				</tbody>
 
-		</table>
-	</div> <!-- end div class ='col-md-8' -->
+			</table>
+		</div> <!-- end div class ='col-md-8' -->
 
 
-	<div class ='col-md-12'><%= link_to 'Add new owner', new_owner_path%></div>
-</div>
+		<div class ='col-md-12'><%= link_to 'Add new owner', new_owner_path%></div>
+	</div>
+<% end %>

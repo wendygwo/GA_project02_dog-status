@@ -1,6 +1,7 @@
 class OwnersController < ApplicationController
 	def index
-			@owners = Owner.all
+				@owners = Owner.order("created_at ASC").all
+
 	end
 	def show
 		if current_owner != nil
@@ -16,7 +17,8 @@ class OwnersController < ApplicationController
 	def create
 		#added for authentication
 		@owner=Owner.create(params.require(:owner).permit(:username, :first_name, :last_name,:password,:image)) 
-		
+		# Make new users not site admin, by default
+		@owner.is_site_admin = false
 		if @owner.save
 			#redirect to owner show page and create session cookie if user successfully created
 			session['owner_id'] = @owner.id.to_s
@@ -41,7 +43,7 @@ class OwnersController < ApplicationController
 	end
 	def update
 		@owner = Owner.find(params[:id])
-		if @owner.update_attributes(params.require(:owner).permit(:username, :first_name, :last_name,:password,:image))
+		if @owner.update_attributes(params.require(:owner).permit(:username, :first_name, :last_name,:password,:image,:is_site_admin))
 			redirect_to owner_path(current_owner)
 		else
 			render 'edit'

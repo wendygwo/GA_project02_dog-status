@@ -48,7 +48,7 @@ class RelationshipsController < ApplicationController
 		@relationship = Relationship.find(params[:id])
 		#For update, I'm only letting them update the is dog admin part. I don't want to remove a relationship unless it's from the dog_show page
 		if @relationship.update_attributes(params.require(:relationship).permit(:is_dog_admin))
-			redirect_to relationships_path
+			redirect_to dog_path(@relationship.dog)
 		else
 			render 'new'
 		end

@@ -11,6 +11,9 @@ class DogsController < ApplicationController
 		if current_owner != nil
 			@dog = Dog.find(params[:id])
 			@owners = @dog.owners #This finds all the owners of the current dog
+			@is_dog_admin = Relationship.where(dog_id: @dog.id, owner_id: current_owner.id).first.is_dog_admin
+			#Checks if logged in user is a site admin
+			@is_site_admin = current_owner.is_site_admin #TO DO - need to add site admin flag to owner model
 		else
 			redirect_to new_session_path
 		end
