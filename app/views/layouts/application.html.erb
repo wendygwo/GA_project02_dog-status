@@ -45,15 +45,33 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right"> <!-- This part has the links -->
-        <% if current_owner != nil %>
-            <li><%= link_to current_owner.full_name, owner_path(current_owner)%></li>
-            <li><%= link_to 'Edit profile', edit_owner_path(current_owner)%></li>
-            <li><%= link_to 'Log out', logout_path, method: :delete %></li>
-        <%# else %>
+      <ul class="nav navbar-nav"> <!-- This part has the links -->
+        <% if current_owner != nil && is_current_owner_site_admin%>
+          <!-- FOR ADMINS ONLY: Link to see all owners, all relationships, all dogs -->
+          <li class='dropdown'>
+            <%= link_to  '#', class:'dropdown-toggle', role:"button", 'aria-expanded'=>"false",:data => {:toggle => "dropdown"} do %> Admin actions <span class="caret"></span><% end%>
+                
+            <ul class="dropdown-menu" role="menu">
+              <li><%= link_to 'See all owners', owners_path()%></li>
+              <li><%= link_to 'See all dogs', dogs_path()%></li>
+              <li><%= link_to 'See all relationships', relationships_path()%></li>
+            </ul>
+          </li>
 
         <% end %>
       </ul>
+      <ul class="nav navbar-nav navbar-right"> <!-- This part has the links -->
+        <% if current_owner != nil %>
+          <!-- Link to current user's show page, with dog info -->
+          <li><%= link_to current_owner.full_name, owner_path(current_owner)%></li>
+          <li><%= link_to 'Edit profile', edit_owner_path(current_owner)%></li>
+          <li><%= link_to 'Log out', logout_path, method: :delete %></li>
+        <% else %>
+          <!-- If not logged in, show login option on toolbar -->
+          <li><%= link_to 'Log in', new_session_path%></li>
+        <% end %>
+      </ul>
+
       <!-- This part has the search bar and button -->
 <!--       <form class="navbar-form navbar-left" role="search">
         <div class="form-group">

@@ -36,9 +36,9 @@ $mainfont: 'Crafty Girls', cursive;
 }
 .ownerContainer, .dogContainer, .relationshipContainer{
 	font-family: $mainfont;
-	background: asset-url('pawprintbackground.jpeg');
+	// background: asset-url('pawprintbackground.jpeg');
 	// background-image: asset-url('pawprintbackground.jpeg');
-	background-size: 75px 75px;
+	// background-size: 75px 75px;
   text-align: center;
 }
 .newOwnerSignup{

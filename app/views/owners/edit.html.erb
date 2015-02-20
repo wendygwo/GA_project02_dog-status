@@ -22,5 +22,10 @@
 				<%= f.submit 'Save your updates', class:'btn btn-primary btn-lg center-block' %>
 			<% end %>
 		</div>
-		<div class='col-xs-4'></div>
+	</div>
+	<div class='row'>
+		<div class='col-xs-4 col-xs-offset-4'>
+			<%= link_to 'Cancel updates', owner_path(@owner) , class:'text-center'%>
+		</div>
+	</div>
 </div>

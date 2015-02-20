@@ -3,7 +3,7 @@
 	<div class='row'>
 		<div class='col-sm-2'></div>
 		<div class='col-sm-8'>
-			<h1> Welcome to your doggie dashboard!</h1>
+			<h1> Welcome to your doggie dashboard <%=@owner.first_name%>!</h1>
 		</div>
 		<div class='col-sm-2'></div>
 	</div>
@@ -51,4 +51,3 @@
 </div>
 
 <p><%= link_to 'Add a new dog', new_dog_path(:owner_id => @owner.id) %></p> <!-- This lets you pass in a parameter of your own naming -->
-<p><%= link_to 'Back to all owners', owners_path%></p>

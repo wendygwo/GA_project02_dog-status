@@ -18,7 +18,7 @@ class OwnersController < ApplicationController
 		#added for authentication
 		# raise params.inspect
 		@owner=Owner.create(params.require(:owner).permit(:username, :first_name, :last_name,:password,:password_confirmation,:image)) 
-		
+		# @owner=Owner.create(params.require(:owner).permit(:username, :first_name, :last_name,:image)) 
 		if is_current_owner_site_admin
 			# Only set the site admin flag based on user input if the user adding them is an admin
 			@owner.is_site_admin = params[:owner][:is_site_admin]
