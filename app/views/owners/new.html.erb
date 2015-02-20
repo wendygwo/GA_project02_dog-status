@@ -13,31 +13,18 @@
 	<div class='row'>
 		<div class='col-xs-2'></div>
 		<div class='col-xs-8'>
-			<%= form_for @owner do |f|%>
-				<div id='username'
-					<p>Username: <%= f.text_field :username, class: 'signupfield' %></p>
-					<!-- Warning for non-unique owner name -->
-					<p class="text-danger"><%=@owner.errors[:username][0]%></p>
-				</div>
-
-				<p>First name: <%= f.text_field :first_name, class: 'signupfield' %></p>
-				<!-- Warning for first name -->
-				<p class="text-danger"><%=@owner.errors[:first_name][0]%></p>
-
-				<p>Last name: <%= f.text_field :last_name, class: 'signupfield' %></p>
-				<!-- Warning for last name -->
-				<p class="text-danger"><%=@owner.errors[:last_name][0]%></p>
-
+			<%= bootstrap_form_for @owner do |f|%>
+				
+				<p><%= f.text_field :username, class: 'signupfield' %></p>
+				<p><%= f.text_field :first_name, class: 'signupfield' %></p>
+				<p><%= f.text_field :last_name, class: 'signupfield' %></p>
+			
 				<p>Profile picture:</p><br />
 				<%=f.file_field :image, class:'text-center' %> <br />
 				
-				<p>Password: <%=f.password_field :password, class: 'signupfield' %></p>
-				<!-- Warning for password -->
-				<p class="text-danger"><%=@owner.errors[:password][0]%></p>
+				<p><%=f.password_field :password, class: 'signupfield' %></p>
 
-				<p>Password confirmation: <%=f.password_field :password_confirmation, class: 'signupfield' %></p>
-				<!-- Warning for password -->
-				<p class="text-danger"><%=@owner.errors[:password_confirmation][0]%></p>
+				<p><%=f.password_field :password_confirmation, class: 'signupfield' %></p>
 
 				<%= f.submit 'Add this owner' %>
 			<% end %>

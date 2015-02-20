@@ -1,5 +1,6 @@
 class Dog < ActiveRecord::Base
-	has_many :relationships
+	#the dependent: :destroy will destroy all associated records when a dog is deleted. It won't delete the owner
+	has_many :relationships, dependent: :destroy 
 	has_many :owners, through: :relationships
 
 	has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"

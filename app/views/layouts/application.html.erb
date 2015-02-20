@@ -17,7 +17,7 @@
 <% elsif @dog || @dogs %>
   <body class='dogContainer'>
 <% elsif @owner || @owners %>
-  <% if (params[:controller]=='owners' && params[:action] != 'new') %>
+  <% if (params[:controller]=='owners' && (params[:action] != 'new') && (params[:action] != 'create'))%>
     <body class='ownerContainer'>
   <% else %>
     <body class='newOwnerSignup'>

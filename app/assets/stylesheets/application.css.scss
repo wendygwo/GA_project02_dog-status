@@ -10,6 +10,7 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require rails_bootstrap_forms
  *= require_tree .
  *= require_self
  */
@@ -27,17 +28,16 @@ $mainfont: 'Crafty Girls', cursive;
 	font-family: $mainfont;
 }
 .login {
-	// background-image: url('black_lab_puppy.jpg');
-	// background-image: url('<%= asset_path("black_lab_puppy.jpg") %>');
-	background-image: asset-url('black_lab_puppy.jpg');
+	// background-image: asset-url('black_lab_puppy.jpg');
+	background: asset-url('black_lab_puppy.jpg') no-repeat top center fixed;
 	background-size: cover;
 	color: white;
 	font-family: $mainfont;
 }
 .ownerContainer, .dogContainer, .relationshipContainer{
 	font-family: $mainfont;
-	background-image: asset-url('pawprintbackground.jpeg');
-	// background-image: url('pawprintbackground.jpeg');
+	background: asset-url('pawprintbackground.jpeg') no-repeat top center fixed;
+	// background-image: asset-url('pawprintbackground.jpeg');
 	background-size: 75px 75px;
   text-align: center;
 }

@@ -16,7 +16,7 @@ class OwnersController < ApplicationController
 	end
 	def create
 		#added for authentication
-		@owner=Owner.create(params.require(:owner).permit(:username, :first_name, :last_name,:password,:image)) 
+		@owner=Owner.create(params.require(:owner).permit(:username, :first_name, :last_name,:password,:password_confirmation,:image)) 
 		# Make new users not site admin, by default
 		@owner.is_site_admin = false
 		if @owner.save
@@ -43,7 +43,7 @@ class OwnersController < ApplicationController
 	end
 	def update
 		@owner = Owner.find(params[:id])
-		if @owner.update_attributes(params.require(:owner).permit(:username, :first_name, :last_name,:password,:image,:is_site_admin))
+		if @owner.update_attributes(params.require(:owner).permit(:username, :first_name, :last_name,:password,:password_confirmation, :image, :is_site_admin))
 			redirect_to owner_path(current_owner)
 		else
 			render 'edit'
