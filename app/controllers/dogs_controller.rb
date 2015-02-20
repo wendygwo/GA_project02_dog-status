@@ -12,6 +12,10 @@ class DogsController < ApplicationController
 			@dog = Dog.find(params[:id])
 			@owners = @dog.owners #This finds all the owners of the current dog
 			@is_dog_admin = Relationship.where(dog_id: @dog.id, owner_id: current_owner.id).first.is_dog_admin
+			#grab the last record, because that's the most updated one
+			@dog_daily_status = Status.where(dog_id: @dog.id).last
+			#TO DO - add in conditionals here, so that if the date of the last update is not the same as the current date, create a new record
+
 		else
 			redirect_to new_session_path
 		end
@@ -33,6 +37,8 @@ class DogsController < ApplicationController
 			#creates relationship between the current dog and the owner that requested this dog be created
 			#Automatically makes the owner who added this relationship as a dog_admin
 			@dog.relationships.create(owner: @owner, is_dog_admin:true) 
+			# Create the first status record when a new dog is created
+			@status = @dog.statuses.create(is_fed_breakfast:false, is_fed_dinner:false, is_walked:false, num_treats_given:2, notes:'No notes.')
 			#redirects to the show page of the owner who requested the dog be added
 			redirect_to owner_path(@owner) 
 		else

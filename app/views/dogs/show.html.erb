@@ -1,11 +1,3 @@
-
-***======================================================================================================*** <br />
-	<p>Parameters passed from dog controller, show method. Delete later!!!</p>
-	<p>is_dog_admin: <%= @is_dog_admin %></p>
-	<p>is_site_admin:	<%= is_current_owner_site_admin %></p>
-	***======================================================================================================*** <br />
-
-
 <div class='container-fluid'>
 
 	<div class='row'>
@@ -25,7 +17,26 @@
 		<%= image_tag @dog.image.url(:thumb) %>
 	<% end %>
 
+	<!--**********************************-->
+	<!-- Start dog status section         -->
+	<!--**********************************-->
+	<h3>My daily status</h3>
+	<h6>Last updated at <%= @dog_daily_status.updated_at %> </h6>
 
+	<p>Today I've been:</p>
+	<%= check_box_tag 'is_fed_breakfast', 'yes', @dog_daily_status.is_fed_breakfast, disabled:true %> Fed breakfast <br />
+  <%= check_box_tag 'is_fed_dinner', 'yes',@dog_daily_status.is_fed_dinner, disabled:true %> Fed dinner <br />
+  <%= check_box_tag 'is_walked', 'yes',@dog_daily_status.is_walked, disabled:true %> Walked <br />
+  Given <%= @dog_daily_status.num_treats_given %> treats
+  <br />
+  Notes:
+  <%= @dog_daily_status.notes %><br />
+
+
+
+	<!--**********************************-->
+	<!-- Start owners section             -->
+	<!--**********************************-->
 	<h3>My owners are</h3>
 
 		<!-- Loop to show all owners for this dog -->
@@ -45,7 +56,7 @@
 						<tr>
 							<td><%= image_tag owner.image.url(:thumb)%></td>
 							<td><%= owner.full_name%></td>
-							<td><%=link_to "See owner details", owner_path(owner) %></td>
+							<td><%= link_to "See owner details", owner_path(owner) %></td>
 
 							<!-- This creates dynamic info about if the owner on this row is a dog admin and allows you to change that if logged in user is a dog admin -->
 								<% if is_current_owner_site_admin || @is_dog_admin%>
@@ -86,4 +97,9 @@
 <% end %>
 
 
-
+<br />
+***======================================================================================================*** <br />
+	<p>Parameters passed from dog controller, show method. Delete later!!!</p>
+	<p>is_dog_admin: <%= @is_dog_admin %></p>
+	<p>is_site_admin:	<%= is_current_owner_site_admin %></p>
+	***======================================================================================================*** <br />

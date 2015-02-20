@@ -1,0 +1,37 @@
+<% if !is_current_owner_site_admin %>
+	<!-- Shows an error message if you aren't a site admin -->
+	<h1 class='text-danger'>You can't view this page because you aren't a site admin</h1>
+	<%=link_to 'Click here to go back to your doggie dashboard', owner_path(current_owner) %>
+<% else %>
+	<h1>All dog statuses</h1>
+
+	<div class='fluid-container'>
+		<div class='row'>
+		<div class='col-xs-6 col-xs-offset-3'>
+			<table>
+				<thead>
+					<tr>
+						<th>Is fed breakfast</th>
+						<th>Is fed dinner</th>
+						<th>Is walked</th>
+						<th>Number treats given</th>
+						<th>Notes</th>
+						<th>Dog ID</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @statuses.each do |status| %>
+						<tr>
+							<td><%= check_box_tag 'is_fed_breakfast', 'yes', status.is_fed_breakfast, disabled:true %></td>
+							<td><%= check_box_tag 'is_fed_dinner', 'yes',status.is_fed_dinner, disabled:true %></td>
+							<td><%= check_box_tag 'is_walked', 'yes',status.is_walked, disabled:true %></td>
+							<td><%= status.num_treats_given %></td>
+							<td><%= status.notes %></td>
+							<td><%= status.dog_id %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+<% end %>

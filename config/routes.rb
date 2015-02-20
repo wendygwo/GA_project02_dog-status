@@ -4,13 +4,11 @@ Rails.application.routes.draw do
   
   delete '/sessions' => 'sessions#destroy', as: 'logout'
 
-  # post '/owners/new' => 'owners#create'
   resources :sessions, only: [:new, :create, :destroy]
-
   resources :dogs
-  
   resources :relationships
   resources :owners
+  resources :statuses
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
