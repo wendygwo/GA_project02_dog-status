@@ -6,26 +6,20 @@
 	</div>
 
 	<div class='row'>
-		<div class='col-xs-4'></div>
-		<div class='col-xs-4 text-left'>
-			<%= form_for @owner do |f|%>
-				<%= f.label :username %>
+		<div class='col-xs-4 col-xs-offset-4 text-left'>
+			<%= bootstrap_form_for @owner do |f|%>
 				<%= f.text_field :username %> <br />
-				<%= f.label :first_name %>
 				<%= f.text_field :first_name %> <br />
-				<%= f.label :last_name %>
 				<%= f.text_field :last_name %> <br />
 				<% if @owner.image_file_name != nil%>
 					<p>Your current profile picture</p>
 					<%= image_tag @owner.image.url(:thumb) %>  <!-- Show current profile picture -->
-				<% else%>
-					<p>Choose a profile picture:</p>
 				<% end %>
-			  <%=f.file_field :image, class:'text-center' %> <br />
-			  <p>Password: <%=f.password_field :password %></p>
-			  <p>Password confirmation: <%=f.password_field :password_confirmation %></p>
+			  <%=f.file_field :image, label: "Choose a profile picture" %> <br />
+			  <p><%=f.password_field :password %></p>
+			  <p><%=f.password_field :password_confirmation, label: "Confirm Password" %></p>
 
-				<%= f.submit 'Save your updates', class:'btn btn-primary btn-lg' %>
+				<%= f.submit 'Save your updates', class:'btn btn-primary btn-lg center-block' %>
 			<% end %>
 		</div>
 		<div class='col-xs-4'></div>

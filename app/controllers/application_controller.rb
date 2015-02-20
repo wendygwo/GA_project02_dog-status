@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
   	Owner.where(id: session['owner_id']).first
   end
   def is_current_owner_site_admin
-  	current_owner.is_site_admin
+    if current_owner != nil
+  	 current_owner.is_site_admin
+    else
+      return false #returns false for the purpose of creating a new owner when no one is logged in
+    end
   end
 end

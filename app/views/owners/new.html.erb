@@ -3,35 +3,31 @@
 <%# end %>
 <div class='container-fluid'>
 	<div class='row'>
-		<div class='col-xs-4'></div>
-		<div class='col-xs-4'>
-			<h1>Sign up as a new owner!</h1>
+		<div class='col-xs-6 col-xs-offset-3'>
+			<h1 class='text-center'>Sign up as a new owner!</h1>
 		</div>
-		<div class='col-xs-4'></div>
 	</div>
 
 	<div class='row'>
-		<div class='col-xs-2'></div>
-		<div class='col-xs-8'>
+		<div class='col-xs-4 col-xs-offset-4'>
 			<%= bootstrap_form_for @owner do |f|%>
 				
-				<p><%= f.text_field :username, class: 'signupfield' %></p>
-				<p><%= f.text_field :first_name, class: 'signupfield' %></p>
-				<p><%= f.text_field :last_name, class: 'signupfield' %></p>
+				<p><%= f.text_field :username%></p>
+				<p><%= f.text_field :first_name%></p>
+				<p><%= f.text_field :last_name%></p>
 			
 				<p>Profile picture:</p><br />
-				<%=f.file_field :image, class:'text-center' %> <br />
+				<%=f.file_field :image, label: "Choose a profile picture" %> <br />
 				
-				<p><%=f.password_field :password, class: 'signupfield' %></p>
+				<p><%=f.password_field :password %></p>
 
-				<p><%=f.password_field :password_confirmation, class: 'signupfield' %></p>
-
-				<%= f.submit 'Add this owner' %>
+				<p><%=f.password_field :password_confirmation, label: "Confirm Password"%></p>
+				<% if is_current_owner_site_admin %>
+					<p><%=f.check_box :is_site_admin %></p>
+				<% end %>
+				<%= f.submit 'Add this owner', :class =>  'btn btn-primary center-block' %>
 			<% end %>
 		</div>
-
-		<div class='col-xs-2'></div>
-
 	</div> <!-- End row -->
 
 </div>

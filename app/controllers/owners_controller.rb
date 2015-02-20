@@ -16,9 +16,16 @@ class OwnersController < ApplicationController
 	end
 	def create
 		#added for authentication
+		# raise params.inspect
 		@owner=Owner.create(params.require(:owner).permit(:username, :first_name, :last_name,:password,:password_confirmation,:image)) 
-		# Make new users not site admin, by default
-		@owner.is_site_admin = false
+		
+		if is_current_owner_site_admin
+			# Only set the site admin flag based on user input if the user adding them is an admin
+			@owner.is_site_admin = params[:owner][:is_site_admin]
+		else
+			# Make new users not site admin, by default
+			@owner.is_site_admin = false
+		end
 		if @owner.save
 			#redirect to owner show page and create session cookie if user successfully created
 			session['owner_id'] = @owner.id.to_s

@@ -1,20 +1,29 @@
-<h2> Add a dog</h2>
+<div class='container-fluid'>
+	<div class='row'>
+		<div class='col-xs-6 col-xs-offset-3'>
+			<h2> Add a dog</h2>
+		</div>
+	</div>
 
-<%= form_for @dog do |f| %>
+	<div class='row'>
+		<div class='col-xs-4 col-xs-offset-4'>
+			<%= bootstrap_form_for @dog do |f| %>
 
-	<p>Name: <%= f.text_field :dog_name %></p>
-	<p>Breed: <%=f.text_field :breed %></p>
-	<p>Birthday: <%=f.date_field :birthday %></p>
-	<p>Food low? <%=f.check_box :food_low_flag %></p> <!-- Shows checkbox based on database value -->
-	<p>Treats low? <%=f.check_box :treats_low_flag %></p> <!-- Shows checkbox based on database value -->
-	<p>Profile picture: </p>
-	<p><%=f.file_field :image, class:'text-center' %> </p><br />
+				<p><%= f.text_field :dog_name %></p>
+				<p><%=f.text_field :breed %></p>
+				<p><%=f.date_field :birthday %></p>
+				<p><%=f.check_box :food_low_flag, label: "Food low?" %></p> <!-- Shows checkbox based on database value -->
+				<p><%=f.check_box :treats_low_flag, label: "Treats low?" %></p> <!-- Shows checkbox based on database value -->
+				<p><%=f.file_field :image, label: "Choose a profile picture" %> </p><br />
 
-	<!-- <p>Owner: <%#= @owner %></p> -->
+				<!-- <p>Owner: <%#= @owner %></p> -->
 
-	<!-- Using a hidden field to pass the owner_id! -->
-	<%= f.hidden_field :dog_owner_id, :value => @owner.id %> 
+				<!-- Using a hidden field to pass the owner_id! -->
+				<%= f.hidden_field :dog_owner_id, :value => @owner.id %> 
 
-	<%= f.submit 'Add this dog!' %> 
+				<%= f.submit 'Add this dog!', :class =>  'btn btn-primary center-block'  %> 
 
-<% end %>
+			<% end %>
+		</div>
+	</div>
+</div>

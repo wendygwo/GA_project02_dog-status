@@ -6,31 +6,30 @@
 	</div>
 
 	<div class='row'>
-		<div class='col-sm-4'></div>
-		<div class='col-sm-4 text-left'>
-			<%= form_for @dog do |f| %>
+		<div class='col-xs-4 col-xs-offset-4 text-left'>
+			<%= bootstrap_form_for @dog do |f| %>
 
-				<p>Name: <%= f.text_field :dog_name %></p>
-				<p>Breed: <%=f.text_field :breed %></p>
-				<p>Birthday: <%=f.date_field :birthday %></p>
-				<p>Food low? <%=f.check_box :food_low_flag %></p> <!-- Shows checkbox based on database value -->
-				<p>Treats low? <%=f.check_box :treats_low_flag %></p> <!-- Shows checkbox based on database value -->
+				<p><%= f.text_field :dog_name %></p>
+				<p><%=f.text_field :breed %></p>
+				<p><%=f.date_field :birthday %></p>
+				<p><%=f.check_box :food_low_flag, label: "Food low?" %></p> <!-- Shows checkbox based on database value -->
+				<p><%=f.check_box :treats_low_flag, label: "Treats low?"  %></p> <!-- Shows checkbox based on database value -->
 				<% if @dog.image_file_name != nil %>
 					<p>Current picture</p>
 					<%= image_tag @dog.image.url(:thumb) %>  <!-- Show current profile picture -->
-				<%else %>
-					<p>Choose a profile picture!</p>
 				<% end %>
-			  <%=f.file_field :image, class:'text-center' %> <br />
+			  <%=f.file_field :image, label: "Choose a profile picture"  %> <br />
 
-				<%= f.submit 'Save your updates to this dog!' %>
+				<%= f.submit 'Save your updates!', class:'btn btn-primary btn-lg center-block'  %>
 				<br />
-				<%= link_to "Cancel changes", owner_path(current_owner) %> 
+				<%= link_to "Cancel changes", owner_path(current_owner)%> 
 			<% end %>
 		</div>
-		<div class='col-sm-4'></div>
+
 	</div>
 
+	<br />
+	<br />
 	<div class='row'>
 		<div class='col-sm-12'>
 			<%= link_to "Show this dog's details", dog_path %> | 
