@@ -30,22 +30,28 @@ $mainfont: 'Crafty Girls', cursive;
 .login {
 	// background-image: asset-url('black_lab_puppy.jpg');
 	background: asset-url('black_lab_puppy.jpg') no-repeat top center fixed;
+	-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
 	background-size: cover;
 	color: white;
 	font-family: $mainfont;
 }
 .ownerContainer, .dogContainer, .relationshipContainer{
 	font-family: $mainfont;
-	background: asset-url('pawprintbackground.jpeg') no-repeat top center fixed;
-	// background-image: asset-url('pawprintbackground.jpeg');
+	// background: asset-url('pawprintbackground.jpeg') no-repeat top center fixed;
+	background-image: asset-url('pawprintbackground.jpeg');
 	background-size: 75px 75px;
   text-align: center;
 }
 .newOwnerSignup{
 	font-family: $mainfont;
-	// background-image: url('Dog_walk.jpg');
-	background-image: asset-url('Dog_walk.jpg');
-	background-size: cover;
+	// background-image: asset-url('Dog_walk.jpg');
+	background: asset-url('Dog_walk.jpg') no-repeat top center fixed;
+	-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 	color: white;
 	font-family: $mainfont;
 }
