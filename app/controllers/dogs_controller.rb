@@ -9,6 +9,7 @@ class DogsController < ApplicationController
 
 	def show
 		if current_owner != nil
+			# raise params.inspect
 			@dog = Dog.find(params[:id])
 			@owners = @dog.owners #This finds all the owners of the current dog
 			@is_dog_admin = Relationship.where(dog_id: @dog.id, owner_id: current_owner.id).first.is_dog_admin

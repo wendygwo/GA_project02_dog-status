@@ -24,23 +24,47 @@
 		<div class='col-sm-10'>
 			<table>	
 				<thead>
-					<th></th>
-					<th>Name</th>
-					<th>Food low?</th>
-					<th>Treats low?</th>
-					<th colspan="3">Actions</th>
+					<th>Dog details</th>
+					<th>Fed breakfast?</th>
+					<th>Fed dinner??</th>
+					<th>Walked?</th>
+					<th>Number treats given</th>
+					<th>Notes</th>
+					<th>Updated</th>
+					<th>Last updated at</th>
 				</thead>
 				<tbody>
 					<% @dogs.each do |dog| %>
+					<!-- grab the last record, because that's the most updated one -->
+					<% @dog_daily_status = Status.where(dog_id: dog.id).last%>
 						<tr>
-							<td><%= image_tag dog.image.url(:thumb)%></td>
-							<td><%= dog.dog_name%></td>
-							<td><%= check_box_tag 'food_low', 'yes', dog.food_low_flag, disabled:true%></td>
-							<td><%= check_box_tag 'treats_low', 'yes',dog.treats_low_flag, disabled:true%></td>
-							<td><%=link_to "Edit status", edit_dog_path(dog) %></td>
-							<td><%=link_to "See details", dog_path(dog) %></td>
-							<!-- <td><%#=link_to "Delete relationship with dog - TO FILL IN", dog, :controller => 'relationship', :action => 'destroy' %></td> -->
-							<td><%= link_to 'Delete relationship!', relationship_path(owner_id: params[:id], dog_id: dog.id), method: :delete %></td>
+							<!-- This first column shows all the dog details that don't change on regular basis -->
+							<td>
+								<%= image_tag dog.image.url(:thumb)%>
+								<br />
+								<h3><%= dog.dog_name%> </h3>
+								Food low: <%= check_box_tag 'food_low', 'yes', dog.food_low_flag, disabled:true%>
+								<br />
+								Treats low<%= check_box_tag 'treats_low', 'yes',dog.treats_low_flag, disabled:true%>
+								<br />
+								<%= link_to "Edit", edit_dog_path(dog) %><br/> 
+								<%= link_to "See details", dog_path(dog) %><br />
+								<%= link_to 'Delete relationship', relationship_path(owner_id: params[:id], dog_id: dog.id), method: :delete %>
+							</td>
+							<%= form_for @dog_daily_status, :url => { :controller => "statuses", :action => "update" } do |f| %>
+								<td><%= f.check_box  :is_fed_breakfast %></td>
+								<td><%= f.check_box :is_fed_dinner %></td>
+								<td><%= f.check_box :is_walked %></td>
+								
+									<td><div class='tabledata3' style="height: 100%"><%= f.text_field :num_treats_given %></div></td>
+								
+
+								<td><%= f.text_area :notes %></td>
+								<!-- Using a hidden field to pass the owner_id! -->
+								<%= f.hidden_field :dog_id, :value => dog.id %> 
+								<td><%= f.submit 'Save updates for dog status' %></td>
+								<td><%= @dog_daily_status.updated_at %></td>
+							<% end %>
 						</tr>
 					<% end %>
 				</tbody>

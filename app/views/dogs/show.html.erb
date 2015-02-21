@@ -23,15 +23,18 @@
 	<h3>My daily status</h3>
 	<h6>Last updated at <%= @dog_daily_status.updated_at %> </h6>
 
-	<p>Today I've been:</p>
-	<%= check_box_tag 'is_fed_breakfast', 'yes', @dog_daily_status.is_fed_breakfast, disabled:true %> Fed breakfast <br />
-  <%= check_box_tag 'is_fed_dinner', 'yes',@dog_daily_status.is_fed_dinner, disabled:true %> Fed dinner <br />
-  <%= check_box_tag 'is_walked', 'yes',@dog_daily_status.is_walked, disabled:true %> Walked <br />
-  Given <%= @dog_daily_status.num_treats_given %> treats
-  <br />
-  Notes:
-  <%= @dog_daily_status.notes %><br />
+<!-- 	<p>Today I've been:</p>
+  <%#= form_for @dog_daily_status, :url => { :controller => "statuses", :action => "update" } do |f| %>
+	  <%#= f.check_box  :is_fed_breakfast %> Fed breakfast <br />
+	  <%#= f.check_box :is_fed_dinner %> Fed dinner <br />
+	  <%#= f.check_box :is_walked %> Walked <br />
+	  Given <%#= f.text_field :num_treats_given %> treats
+	  <br />
+	  Notes:
+	  <%#= f.text_area :notes %><br />
 
+	  <%#= f.submit 'Save updates for dog status' %>
+  <% end %> -->
 
 
 	<!--**********************************-->
