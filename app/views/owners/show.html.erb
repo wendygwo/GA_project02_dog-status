@@ -1,11 +1,24 @@
+<script type="text/javascript">
+$(document).ready(function(){
+  setTimeout(function(){
+    $('#flash').remove();
+  }, 3000);
+ })
+</script>
+
 <div class='container-fluid'>
+	<!-- Alert message for successful dog status record saved completion -->
+	<% if flash[:notice] %>
+    <div id='flash' class="alert alert-info col-xs-4 col-xs-offset-4 alert-dismissible" role="alert">
+    	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    	<%= flash[:notice] %>
+    </div>
+  <% end %>
 
 	<div class='row'>
-		<div class='col-sm-2'></div>
-		<div class='col-sm-8'>
-			<h1> Welcome to your doggie dashboard <%=@owner.first_name%>!</h1>
+		<div class='col-xs-8 col-xs-offset-2'>
+			<h1 class='text-center'> Welcome to your doggie dashboard <%=@owner.first_name%>!</h1>
 		</div>
-		<div class='col-sm-2'></div>
 	</div>
 	<!-- Only show the picture if there's one uploaded. 
 	Without the if statement, a broken picture link shows up -->
@@ -13,7 +26,7 @@
 		<div class="row">
 			<div class='col-sm-2'></div>
 			<div class='col-sm-8'>
-				<%= image_tag @owner.image.url(:thumb) %>
+				<%= image_tag @owner.image.url(:thumb), class:'center-block' %>
 			</div>
 			<div class='col-sm-2'></div>
 		</div>
@@ -24,14 +37,9 @@
 		<div class='col-sm-10'>
 			<table>	
 				<thead>
-					<th>Dog details</th>
-					<th>Fed breakfast?</th>
-					<th>Fed dinner??</th>
-					<th>Walked?</th>
-					<th>Number treats given</th>
-					<th>Notes</th>
-					<th>Updated</th>
-					<th>Last updated at</th>
+					<th class='text-center'>Dog details</th>
+					<th class='text-center'>Today I've been</th>
+
 				</thead>
 				<tbody>
 					<% @dogs.each do |dog| %>
@@ -40,30 +48,33 @@
 						<tr>
 							<!-- This first column shows all the dog details that don't change on regular basis -->
 							<td>
-								<%= image_tag dog.image.url(:thumb)%>
-								<br />
-								<h3><%= dog.dog_name%> </h3>
+								<%= image_tag dog.image.url(:thumb), class:'center-block'%>
+								<h3 class='text-center'><%= dog.dog_name%> </h3>
 								Food low: <%= check_box_tag 'food_low', 'yes', dog.food_low_flag, disabled:true%>
 								<br />
 								Treats low<%= check_box_tag 'treats_low', 'yes',dog.treats_low_flag, disabled:true%>
 								<br />
-								<%= link_to "Edit", edit_dog_path(dog) %><br/> 
-								<%= link_to "See details", dog_path(dog) %><br />
+								<%= link_to "Edit", edit_dog_path(dog) %>|
+								<%= link_to "See details", dog_path(dog) %>|
 								<%= link_to 'Delete relationship', relationship_path(owner_id: params[:id], dog_id: dog.id), method: :delete %>
 							</td>
-							<%= form_for @dog_daily_status, :url => { :controller => "statuses", :action => "update" } do |f| %>
-								<td><%= f.check_box  :is_fed_breakfast %></td>
-								<td><%= f.check_box :is_fed_dinner %></td>
-								<td><%= f.check_box :is_walked %></td>
-								
-									<td><div class='tabledata3' style="height: 100%"><%= f.text_field :num_treats_given %></div></td>
-								
 
-								<td><%= f.text_area :notes %></td>
-								<!-- Using a hidden field to pass the owner_id! -->
-								<%= f.hidden_field :dog_id, :value => dog.id %> 
-								<td><%= f.submit 'Save updates for dog status' %></td>
-								<td><%= @dog_daily_status.updated_at %></td>
+							<!--**********************************-->
+							<!-- Start dog daily status section   -->
+							<!--**********************************-->
+							<%= bootstrap_form_for @dog_daily_status, :url => { :controller => "statuses", :action => "update" } do |f| %>
+								<td>
+									<%= f.check_box  :is_fed_breakfast, label:'Fed breakfast', class:'left-block' %>
+									<%= f.check_box :is_fed_dinner, label:'Fed dinner' %>
+									<%= f.check_box :is_walked, label:'Walked' %>
+									<%= f.number_field :num_treats_given, class: 'numTreats', label:'Given this many treats' %>
+									<%= f.text_area :notes, label:'Notes' %><br />
+									<!-- Using a hidden field to pass the owner_id! -->
+									<%= f.hidden_field :dog_id, :value => dog.id %> 
+									<%= f.submit 'Save daily status updates', class:'btn btn-primary btn-sm center-block' %>
+									<br />
+									Last updated at: <%= @dog_daily_status.updated_at %>
+								</td>
 							<% end %>
 						</tr>
 					<% end %>

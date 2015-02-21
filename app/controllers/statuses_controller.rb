@@ -5,21 +5,7 @@ class StatusesController < ApplicationController
     else
       redirect_to new_session_path
     end
-  end
-
-  # def show
-  #   # @status = Status.where(dog_id: )
-  # end
-
-  def new
-  end
-
-  def create
-  end
-
-  def edit
-
-  end
+  end #end index method
 
   def update
     puts '======================================================'
@@ -31,9 +17,11 @@ class StatusesController < ApplicationController
       puts '======================================================'
       puts 'WENT INTO UPDATE DOG STATUS'
       puts '======================================================'
+      flash[:notice] = "Update successfully saved"
       redirect_to owner_path(owner_id: params[:id])
     else
-      redirect_to owern_path(Dog.where(owner_id: params[:id]))
+      flash[:notice] = "Update not saved"
+      redirect_to owner_path(Dog.where(owner_id: params[:id]))
     end
-  end
+  end #end update method
 end
