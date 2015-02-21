@@ -15,6 +15,7 @@
 					<tr>
 						<th>Owner ID</th>
 						<th>Owner username</th>
+						<th>Owner email</th>
 						<th>Owner first name</th>
 						<th>Owner second name</th>
 						<th>Picture</th>
@@ -26,6 +27,7 @@
 						<tr>
 							<td><%=owner.id%></td>
 							<td><%=owner.username%></td>
+							<td><%=owner.email%></td>
 							<td><%=owner.first_name%></td>
 							<td><%=owner.last_name%></td>
 							<td><%=image_tag owner.image.url(:thumb)%></td>

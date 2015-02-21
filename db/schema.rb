@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150220214709) do
+ActiveRecord::Schema.define(version: 20150221173841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20150220214709) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.boolean  "is_site_admin"
+    t.string   "email"
   end
 
   create_table "relationships", force: true do |t|

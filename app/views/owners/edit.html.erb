@@ -9,6 +9,7 @@
 		<div class='col-xs-4 col-xs-offset-4 text-left'>
 			<%= bootstrap_form_for @owner do |f|%>
 				<%= f.text_field :username %> <br />
+				<%= f.text_field :email%>
 				<%= f.text_field :first_name %> <br />
 				<%= f.text_field :last_name %> <br />
 				<% if @owner.image_file_name != nil%>

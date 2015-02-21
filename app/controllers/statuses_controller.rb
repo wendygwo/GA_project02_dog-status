@@ -8,18 +8,14 @@ class StatusesController < ApplicationController
   end #end index method
 
   def update
-    puts '======================================================'
-    puts params
-    puts '======================================================'
     # raise params.inspect
     @dog_daily_status = Status.where(dog_id: params[:status][:dog_id]).last
     if @dog_daily_status.update_attributes(params.require(:status).permit(:is_fed_breakfast, :is_fed_dinner, :is_walked, :num_treats_given, :notes))
-      puts '======================================================'
-      puts 'WENT INTO UPDATE DOG STATUS'
-      puts '======================================================'
+      #Notice to be shown on the owner path about successful update
       flash[:notice] = "Update successfully saved"
       redirect_to owner_path(owner_id: params[:id])
     else
+      #Notice to be shown on the owner path about unsuccessful update
       flash[:notice] = "Update not saved"
       redirect_to owner_path(Dog.where(owner_id: params[:id]))
     end

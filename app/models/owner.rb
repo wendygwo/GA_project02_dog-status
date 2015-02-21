@@ -8,17 +8,18 @@ class Owner < ActiveRecord::Base
 	validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
 	# Form validations
-
 	validates :username, presence: {message:'You must enter a username!'}
-	validates :username, length: {minimum: 5, message:'Username must be at least 5 characters long'}
-	validates :username, uniqueness: {message: 'Please choose another username. This one has already been taken!'}
+	validates :username, length: {minimum: 5, message:'Username must be at least 5 characters long.'}
+	validates :username, uniqueness: {message: 'Please choose another username. This one has already been taken.'}
 
-	validates :first_name, presence: {message:'First name is required!'}
-	validates :last_name, presence: {message:'Last name is required!'}
+	validates :email, uniqueness: {message: 'This e-mail has already been used to register for this site!'}
+	validates :email, format:{with: /\A[\w+\-.]+@[a-zA-Z\d\-]+\.[a-zA-Z]+\z/, message:'Invalid e-mail format.'}
 
-	validates :password, length: {minimum: 8, message:'Password must be at least 8 characters long'}
+	validates :first_name, presence: {message:'First name is required.'}
+	validates :last_name, presence: {message:'Last name is required.'}
 
-	# validates :email, format:{with: /[\w+\-.]+@[a-z\d\-.]+\.[a-zA-Z]+/, message:'Invalid e-mail format.'}
+	validates :password, length: {minimum: 8, message:'Password must be at least 8 characters long.'}
+
 	def full_name
 		"#{first_name} #{last_name}" #This allows you to show full name for the collection select when adding dog and owner relationships
 	end

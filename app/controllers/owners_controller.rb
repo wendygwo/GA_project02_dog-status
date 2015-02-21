@@ -1,23 +1,22 @@
 class OwnersController < ApplicationController
 	def index
 				@owners = Owner.order("created_at ASC").all
-
 	end
 	def show
 		if current_owner != nil
 			@owner = Owner.find(params[:id])
-			@dogs = @owner.dogs #This finds all the dogs for the current owner
+			#Find all the dogs for the current owner
+			@dogs = @owner.dogs 
 		else
-			redirect_to new_session_path #redirects user to new session path if no owner is logged in
+			#Redirects user to new session path if no owner is logged in
+			redirect_to new_session_path 
 		end
 	end
 	def new
 		@owner = Owner.new
 	end
 	def create
-		#added for authentication
-		# raise params.inspect
-		@owner=Owner.create(params.require(:owner).permit(:username, :first_name, :last_name,:password,:password_confirmation,:image)) 
+		@owner=Owner.create(owner_params) 
 		# @owner=Owner.create(params.require(:owner).permit(:username, :first_name, :last_name,:image)) 
 		if is_current_owner_site_admin
 			# Only set the site admin flag based on user input if the user adding them is an admin
@@ -50,7 +49,7 @@ class OwnersController < ApplicationController
 	end
 	def update
 		@owner = Owner.find(params[:id])
-		if @owner.update_attributes(params.require(:owner).permit(:username, :first_name, :last_name,:password,:password_confirmation, :image, :is_site_admin))
+		if @owner.update_attributes(owner_params)
 			redirect_to owner_path(current_owner)
 		else
 			render 'edit'
@@ -60,5 +59,11 @@ class OwnersController < ApplicationController
 		@owner=Owner.find(params[:id])
 		@owner.destroy
 		redirect_to owners_path
+	end
+	
+	private
+
+	def owner_params
+		params.require(:owner).permit(:username, :first_name, :last_name,:password,:password_confirmation,:image,:email)
 	end
 end
