@@ -1,77 +1,83 @@
-<div class='container-fluid'>
+<% if is_current_owner_site_admin || @is_dog_admin %>
+		<div class='container-fluid'>
 
-	<h1 class='text-center'> <%=@dog.dog_name %>'s info</h1>
+			<h1 class='text-center showH1Font whiteText'> <%=@dog.dog_name %>'s info</h1>
 
-	<!-- Shows dog's image if there is one -->
-	<% if @dog.image_file_name != nil%>
-		<%= image_tag @dog.image.url(:thumb), class:'center-block' %>
-	<% end %>
+			<!-- Shows dog's image if there is one -->
+			<% if @dog.image_file_name != nil%>
+				<%= image_tag @dog.image.url(:thumb), class:'center-block' %>
+			<% end %>
 
-	<div class='row'>
-		<div class='col-xs-2 col-xs-offset-5'>
+			<div class='row whiteText'>
+				<div class='col-xs-2 col-xs-offset-5'>
 
-			<p>Breed: <%=@dog.breed %></p>
-			<p>Birthday: <%=@dog.birthday %></p>
-			<p>Food low? <%=check_box_tag 'food_low' , 'yes', @dog.food_low_flag, disabled:true %></p>
-			<p>Treats low? <%=check_box_tag 'treats_low' , 'yes', @dog.treats_low_flag, disabled:true %></p>
-			<%= link_to 'Edit my details', edit_dog_path %>
-		</div>
-	</div>
-	<!--**********************************-->
-	<!-- Start owners section             -->
-	<!--**********************************-->
-	<h3 class='text-center'>My owners are</h3>
-
-		<!-- Loop to show all owners for this dog -->
-	<div class='row'>
-		<div class='col-xs-10 col-xs-offset-1'>
-			<table>	
-				<thead>
-					<th>Picture</th>
-					<th>Name</th>
-					<th colspan="3">Actions</th>
-				</thead>
-				<tbody>
-					<% @owners.each do |owner| %>
-						<!-- Find the current relationship record, to allow for relationship manipulations -->
-						<% current_relationship = Relationship.where(owner_id: owner.id, dog_id: @dog.id).first %>
-						<tr>
-							<td><%= image_tag owner.image.url(:thumb)%></td>
-							<td><%= owner.full_name%></td>
-							<td><%= link_to "See owner details", owner_path(owner) %></td>
-
-							<!-- This creates dynamic info about if the owner on this row is a dog admin and allows you to change that if logged in user is a dog admin -->
-								<% if is_current_owner_site_admin || @is_dog_admin%>
-									<td>Is 
-										<% if !current_relationship.is_dog_admin %>
-											not
-										<% end %>
-										a dog admin. <br />
-
-										<!-- Give a link to edit dog admin status-->
-										Click <%=link_to "here", edit_relationship_path(current_relationship) %> 	to edit this.
-									</td>
-								<% end %>
-						</tr>
-					<% end %>
-				</tbody>
-			</table>
-		</div> <!-- End all owners col div -->
-	</div> <!-- End all owners row div -->
-
-	<br />
-	<div class='row'>
-		<% if is_current_owner_site_admin || @is_dog_admin%>
-			<div class='col-xs-6 col-xs-offset-3 text-center'>
-				<%= link_to 'Add new owner(s) for this dog', new_relationship_path(dog_id: @dog.id)%> <br />
-				<br />
-				<!-- TO DO: need to delete all relationships linked to this dog, in addition to deleting the dog-->
-				<%= link_to 'Delete this dog', :dog, method: :delete, data: {confirm: 'Are you sure you want to delete this dog?'} %> 
+					<p>Breed: <%=@dog.breed %></p>
+					<p>Birthday: <%=@dog.birthday %></p>
+					<p>Food low? <%=check_box_tag 'food_low' , 'yes', @dog.food_low_flag, disabled:true %></p>
+					<p>Treats low? <%=check_box_tag 'treats_low' , 'yes', @dog.treats_low_flag, disabled:true %></p>
+					<%= link_to 'Edit my details', edit_dog_path, class:'btn btn-primary' %>
+				</div>
 			</div>
-		<% end %>
-	</div>
-</div><!--  End fluid container div -->
+			<!--**********************************-->
+			<!-- Start owners section             -->
+			<!--**********************************-->
+			<h3 class='text-center showH1Font whiteText'>My owners are</h3>
 
+				<!-- Loop to show all owners for this dog -->
+			<div class='row'>
+				<div class='col-xs-10 col-xs-offset-1'>
+					<table class='well well-lg'>	
+						<thead>
+							<th>Picture</th>
+							<th>Name</th>
+							<th colspan="3">Actions</th>
+						</thead>
+						<tbody>
+							<% @owners.each do |owner| %>
+								<!-- Find the current relationship record, to allow for relationship manipulations -->
+								<% current_relationship = Relationship.where(owner_id: owner.id, dog_id: @dog.id).first %>
+								<tr>
+									<td><%= image_tag owner.image.url(:thumb)%></td>
+									<td><%= owner.full_name%></td>
+									<td><%= link_to "See owner details", owner_path(owner) %></td>
+
+									<!-- This creates dynamic info about if the owner on this row is a dog admin and allows you to change that if logged in user is a dog admin -->
+										<% if is_current_owner_site_admin || @is_dog_admin%>
+											<td>Is 
+												<% if !current_relationship.is_dog_admin %>
+													not
+												<% end %>
+												a dog admin. <br />
+
+												<!-- Give a link to edit dog admin status-->
+												Click <%=link_to "here", edit_relationship_path(current_relationship) %> 	to edit this.
+											</td>
+										<% end %>
+								</tr>
+							<% end %>
+						</tbody>
+					</table>
+				</div> <!-- End all owners col div -->
+			</div> <!-- End all owners row div -->
+
+			<br />
+			<div class='row'>
+				<% if is_current_owner_site_admin || @is_dog_admin%>
+					<div class='col-xs-6 col-xs-offset-3 text-center'>
+						<%= link_to 'Add new owner(s) for this dog', new_relationship_path(dog_id: @dog.id)%> <br />
+						<br />
+						<!-- TO DO: need to delete all relationships linked to this dog, in addition to deleting the dog-->
+						<%= link_to 'Delete this dog', :dog, method: :delete, data: {confirm: 'Are you sure you want to delete this dog?'} %> 
+					</div>
+				<% end %>
+			</div>
+		</div><!--  End fluid container div -->
+
+<% else %>
+<!-- Shows an error message if you aren't a site admin -->
+	<h1 class='text-danger'>You don't have permission to view this page</h1>
+	<%=link_to 'Click here to go back to your doggie dashboard', owner_path(current_owner) %>
+<% end %>
 
 
 

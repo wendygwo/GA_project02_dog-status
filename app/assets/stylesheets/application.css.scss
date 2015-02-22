@@ -33,35 +33,37 @@ $mainfonttableheader:'Rock Salt', cursive; //seems like very real handwriting. C
 $mainfonttest: 'Ubuntu Mono';
 $paletteBrown: #463730;
 $paletteWhite: #F7F7FF;
-
+$blueBackground: #3F7CAC;
 
 #navigation{
 	font-family: $mainfonttest;
 	font-size: 115%;
 }
+//For navbar brand
 .brandTextSize{
 	font-size: 125%;
 }
 
+//Generic styling
+.whiteText{
+	color: $paletteWhite;
+}
+
+//Login page
 .login {
-	// background-image: asset-url('black_lab_puppy.jpg');
 	background: asset-url('black_lab_puppy.jpg') no-repeat top center fixed;
 	background-size: cover;
-	color: $paletteWhite;
-
+	@extend .whiteText;
 }
-.ownerContainer, .dogContainer, .relationshipContainer{
-
-	// background: asset-url('pawprintbackground.jpeg');
-	// background-image: asset-url('pawprintbackground.jpeg');
-	// background-size: 75px 75px;
+//Owner, dog, and relationship pages
+.ownerContainer, .dogContainer, .relationshipContainer, .statusContainer{
+	background-color: #2D2D2A;
 }
 .newOwnerSignup{
 	 // background-image: asset-url('Dog_walk.jpg');
 	background: asset-url('Dog_walk.jpg') no-repeat top center fixed;
   background-size: cover;
-	color: white;
-
+	@extend .whiteText;
 }
 .showH1Font{
 	font-family: $mainfonttest;
@@ -75,42 +77,43 @@ ul
   list-style: none;
   padding:0;
   margin:0;
+}	
+.separateOwnerInfo{
+	height: 2px;
+	width: 60%;
+	background-color: $blueBackground;
 }
-
 table{
 	border-collapse: collapse;
+	// border-spacing:0;
 	margin: 0 auto;
 	font-family: $mainfonttableheader;
 }
+table.each_dog_status{
+	width:90%;
+} 
+td.dogDetails, td.dogDailyStatus{
+	padding: 20px 10px;
+}
+td.dogDetails{
+	background-color: $blueBackground;
+	width:30%;
+}
 
-	
 thead>tr>th{
 	background-color: #3071A9;
-}
-#all_dogs{
-	table, th, td {
-		border: 2px solid black;
-	}
-	td {
-		font-family: $mainfonttabledata;
-	}
-
-	tr:nth-child(even) {
-		background: #CCC
-	}
-	tr:nth-child(odd){
-			background: #FFF
-	}
-}
-.all_dog_owners{
-	border-collapse: collapse;
-	margin: 0 auto;
 	font-family: $mainfonttableheader;
-	border-style: none;
-	tr:nth-child(even) {
-	background-color: white;
-	}
-	tr:nth-child(odd){
-		background-color: gray;
-	}
+
 }
+td {
+		font-family: $mainfonttabledata;
+		vertical-align: top;
+}
+
+
+// tr:nth-child(even) {
+// 	background: white;
+// }
+// tr:nth-child(odd){
+// 		background: gray;
+// }

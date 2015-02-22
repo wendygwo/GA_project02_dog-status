@@ -1,11 +1,22 @@
-<h1>Add a new owner relationship </h1>
+<% if is_current_owner_site_admin || @relationship.is_dog_admin%>
+	<div class='row whiteText'>
+		<h1 class='text-center'>Add a new owner relationship </h1>
+		<div class='col-xs-6 col-xs-offset-3'>
 
-<%=form_for @relationship do |f|%>
-	<!-- Only show current dog from the collection select -->
-	<p>Dog: <%=f.collection_select :dog_id, @dog_select, :id, :dog_name %></p>
-	<!-- Only show owners that aren't already owners of this dog -->
-	<p>Owner: <%=f.collection_select :owner_id, @users_not_already_owners, :id, :full_name %></p>
 
-	<p>Is dog admin: <%=f.check_box :is_dog_admin %></p>
-	<%=f.submit 'Add this new relationship' %>
+			<%=form_for @relationship do |f|%>
+				<!-- Only show current dog from the collection select -->
+				<p>Dog: <%=f.collection_select :dog_id, @dog_select, :id, :dog_name %></p>
+				<!-- Only show owners that aren't already owners of this dog -->
+				<p>Owner: <%=f.collection_select :owner_id, @users_not_already_owners, :id, :full_name %></p>
+
+				<p>Is dog admin: <%=f.check_box :is_dog_admin %></p>
+				<%=f.submit 'Add this new relationship', class:'btn btn-primary' %>
+			<% end %>
+		<% else %>
+			<!-- Shows an error message if you aren't a site admin -->
+			<h1 class='text-danger'>You can't view this page because you aren't a dog admin</h1>
+			<%=link_to 'Click here to go back to your doggie dashboard', owner_path(current_owner) %>
+		</div>
+	</div>
 <% end %>

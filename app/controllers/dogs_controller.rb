@@ -12,11 +12,16 @@ class DogsController < ApplicationController
 			# raise params.inspect
 			@dog = Dog.find(params[:id])
 			@owners = @dog.owners #This finds all the owners of the current dog
-			@is_dog_admin = Relationship.where(dog_id: @dog.id, owner_id: current_owner.id).first.is_dog_admin
+			# @is_dog_admin = Relationship.where(dog_id: @dog.id, owner_id: current_owner.id).first.is_dog_admin
+			current_owner_relationship = Relationship.where(dog_id: @dog.id, owner_id: current_owner.id).first;
+			if current_owner_relationship != nil
+				@is_dog_admin=current_owner_relationship.is_dog_admin;
+			else
+				@is_dog_admin=false;
+			end
 			#grab the last record, because that's the most updated one
 			@dog_daily_status = Status.where(dog_id: @dog.id).last
 			#TO DO - add in conditionals here, so that if the date of the last update is not the same as the current date, create a new record
-
 		else
 			redirect_to new_session_path
 		end
