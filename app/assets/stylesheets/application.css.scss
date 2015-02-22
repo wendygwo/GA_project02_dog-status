@@ -15,6 +15,9 @@
  *= require_self
  */
 @import 'bootstrap';
+body{
+	padding-top: 50px;
+}
 
 .brandImage{
 	height: 25px;
@@ -23,32 +26,45 @@
 .numTreats{
 	width: 75px;
 }
-// @import url(https://fonts.googleapis.com/css?family=Indie+Flower);
-@import url(https://fonts.googleapis.com/css?family=Crafty+Girls);
-$mainfont: 'Crafty Girls', cursive;
+// @import url(https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Rock+Salt);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono|Gloria+Hallelujah|Rock+Salt);
+$mainfonttabledata:'Gloria Hallelujah', cursive;
+$mainfonttableheader:'Rock Salt', cursive; //seems like very real handwriting. Can look a little messy or childish
+$mainfonttest: 'Ubuntu Mono';
+$paletteBrown: #463730;
+$paletteWhite: #F7F7FF;
+
+
 #navigation{
-	font-family: $mainfont;
+	font-family: $mainfonttest;
+	font-size: 115%;
 }
+.brandTextSize{
+	font-size: 125%;
+}
+
 .login {
 	// background-image: asset-url('black_lab_puppy.jpg');
 	background: asset-url('black_lab_puppy.jpg') no-repeat top center fixed;
 	background-size: cover;
-	color: white;
-	font-family: $mainfont;
+	color: $paletteWhite;
+
 }
 .ownerContainer, .dogContainer, .relationshipContainer{
-	font-family: $mainfont;
+
 	// background: asset-url('pawprintbackground.jpeg');
 	// background-image: asset-url('pawprintbackground.jpeg');
 	// background-size: 75px 75px;
 }
 .newOwnerSignup{
-	font-family: $mainfont;
 	 // background-image: asset-url('Dog_walk.jpg');
 	background: asset-url('Dog_walk.jpg') no-repeat top center fixed;
   background-size: cover;
 	color: white;
-	font-family: $mainfont;
+
+}
+.showH1Font{
+	font-family: $mainfonttest;
 }
 .helperTextClass{
 	color:white;
@@ -56,7 +72,6 @@ $mainfont: 'Crafty Girls', cursive;
 }
 ul
 {
-	font-family: $mainfont;
   list-style: none;
   padding:0;
   margin:0;
@@ -65,18 +80,37 @@ ul
 table{
 	border-collapse: collapse;
 	margin: 0 auto;
+	font-family: $mainfonttableheader;
 }
 
-table, th, td {
-	border: 2px solid black;
-}
-
-tr:nth-child(even) {
-	background: #CCC
-}
-tr:nth-child(odd){
-		background: #FFF
-}
+	
 thead>tr>th{
-	background-color: lightblue;
+	background-color: #3071A9;
+}
+#all_dogs{
+	table, th, td {
+		border: 2px solid black;
+	}
+	td {
+		font-family: $mainfonttabledata;
+	}
+
+	tr:nth-child(even) {
+		background: #CCC
+	}
+	tr:nth-child(odd){
+			background: #FFF
+	}
+}
+.all_dog_owners{
+	border-collapse: collapse;
+	margin: 0 auto;
+	font-family: $mainfonttableheader;
+	border-style: none;
+	tr:nth-child(even) {
+	background-color: white;
+	}
+	tr:nth-child(odd){
+		background-color: gray;
+	}
 }

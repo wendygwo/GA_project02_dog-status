@@ -10,4 +10,5 @@ validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 	#===============trying this to tie dog and owner together====
 	accepts_nested_attributes_for :relationships
 	#=========================================================
+
 end

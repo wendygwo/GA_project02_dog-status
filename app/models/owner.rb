@@ -12,7 +12,7 @@ class Owner < ActiveRecord::Base
 	validates :username, length: {minimum: 5, message:'Username must be at least 5 characters long.'}
 	validates :username, uniqueness: {message: 'Please choose another username. This one has already been taken.'}
 
-	validates :email, uniqueness: {message: 'This e-mail has already been used to register for this site!'}
+	validates :email, uniqueness: {message: 'This e-mail has already been registered by another user!'}
 	validates :email, format:{with: /\A[\w+\-.]+@[a-zA-Z\d\-]+\.[a-zA-Z]+\z/, message:'Invalid e-mail format.'}
 
 	validates :first_name, presence: {message:'First name is required.'}

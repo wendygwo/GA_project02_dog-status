@@ -28,73 +28,70 @@
   <body>
 <% end%>
 
-<nav class="navbar navbar-inverse" id='navigation'>
-  <div class="container-fluid">
-    <!-- This part creates the icon with three lines, when the device gets small enough to require collapsing of the navbar -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span> <!-- This part is for screen readers only -->
-        <span class="icon-bar"></span> <!-- This creates one of the three horizontal lines you see in the button -->
-        <span class="icon-bar"></span> <!-- See comment in above line -->
-        <span class="icon-bar"></span><!-- See comment in above line -->
-      </button>
-
-      <%= link_to image_tag('dog-house-brand.png', :class => 'brandImage'), new_session_path, class:'navbar-brand'%>
-
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav"> <!-- This part has the links -->
-        <% if current_owner != nil && is_current_owner_site_admin%>
-          <!-- FOR ADMINS ONLY: Link to see all owners, all relationships, all dogs -->
-          <li class='dropdown'>
-            <%= link_to  '#', class:'dropdown-toggle', role:"button", 'aria-expanded'=>"false",:data => {:toggle => "dropdown"} do %> Admin actions <span class="caret"></span><% end%>
-                
-            <ul class="dropdown-menu" role="menu">
-              <li><%= link_to 'See all owners', owners_path()%></li>
-              <li><%= link_to 'See all dogs', dogs_path()%></li>
-              <li><%= link_to 'See all relationships', relationships_path()%></li>
-            </ul>
-          </li>
-
+  <nav class="navbar navbar-inverse navbar-fixed-top" id='navigation'>
+    <div class="container-fluid">
+      <!-- Navbar header -->
+      <div class="navbar-header">
+        <!-- Using block version of link_to so I can have text and an image show up for the brand -->
+        <%= link_to new_session_path, class:'navbar-brand brandTextSize' do%>
+          <%= image_tag('dog-house-brand.png', :class => 'brandImage')%>
+          Where My Dogs at?
         <% end %>
-      </ul>
-      <ul class="nav navbar-nav navbar-right"> <!-- This part has the links -->
-        <% if current_owner != nil %>
-          <!-- Link to current user's show page, with dog info -->
-          <li><%= link_to current_owner.full_name, owner_path(current_owner)%></li>
-          <li><%= link_to 'Edit profile', edit_owner_path(current_owner)%></li>
-          <li><%= link_to 'Log out', logout_path, method: :delete %></li>
-        <% else %>
-          <!-- If not logged in, show login option on toolbar -->
-          <li><%= link_to 'Log in', new_session_path%></li>
-        <% end %>
-      </ul>
+        <!-- navbar-toggle pulls the button all the way to the right, when the full navbar disappears -->
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <!-- This part creates the icon with three lines, when the device gets small enough to require collapsing of the navbar -->
+          <span class="sr-only">Toggle navigation</span> <!-- This part is for screen readers only -->
+          <span class="icon-bar"></span> <!-- This creates one of the three horizontal lines you see in the button -->
+          <span class="icon-bar"></span> <!-- See comment in above line -->
+          <span class="icon-bar"></span><!-- See comment in above line -->
+        </button>
 
-      <!-- This part has the search bar and button -->
-<!--       <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form> -->
-      
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+      </div> <!-- End navbar-header -->
 
-<%= yield %>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav"> <!-- This part has the links -->
+          <% if current_owner != nil && is_current_owner_site_admin%>
+            <!-- FOR ADMINS ONLY: Link to see all owners, all relationships, all dogs -->
+            <li class='dropdown'>
+              <%= link_to  '#', class:'dropdown-toggle', role:"button", 'aria-expanded'=>"false",:data => {:toggle => "dropdown"} do %> Admin actions <span class="caret"></span><% end%>
+                  
+              <ul class="dropdown-menu" role="menu">
+                <li><%= link_to 'See all owners', owners_path()%></li>
+                <li><%= link_to 'See all relationships', relationships_path()%></li>
+                <li><%= link_to 'See all dogs', dogs_path()%></li>
+                <li><%= link_to 'See all dog statuses', statuses_path()%></li>
+              </ul>
+            </li>
 
-<div class ='col-md-12'>
-	<br>
-	<br>
-	<hr>
-	<h3>Parameters (delete this from application.html.erb later!)</h3>
-	<%= params.inspect %>
-  <p>Session ID: <p>
-  <%=session['owner_id']%>
-</div>
+          <% end %>
+        </ul>
+        <ul class="nav navbar-nav navbar-right"> <!-- This part has the links -->
+          <% if current_owner != nil %>
+            <!-- Link to current user's show page, with dog info -->
+            <li><%= link_to current_owner.full_name, owner_path(current_owner)%></li>
+            <li><%= link_to 'Edit profile', edit_owner_path(current_owner)%></li>
+            <li><%= link_to 'Log out', logout_path, method: :delete %></li>
+          <% else %>
+            <!-- If not logged in, show login option on toolbar -->
+            <li><%= link_to 'Log in', new_session_path%></li>
+          <% end %>
+        </ul> <!-- End navbar-right   -->      
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+  <%= yield %>
+
+  <div class ='col-md-12'>
+  	<br>
+  	<br>
+  	<hr>
+  	<h3>Parameters (delete this from application.html.erb later!)</h3>
+  	<%= params.inspect %>
+    <p>Session ID: <p>
+    <%=session['owner_id']%>
+  </div>
 
 </body>
 </html>
