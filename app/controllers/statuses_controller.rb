@@ -13,11 +13,10 @@ class StatusesController < ApplicationController
     if @dog_daily_status.update_attributes(params.require(:status).permit(:is_fed_breakfast, :is_fed_dinner, :is_walked, :num_treats_given, :notes))
       #Notice to be shown on the owner path about successful update
       flash[:notice] = "Update successfully saved"
-      redirect_to owner_path(owner_id: params[:id])
     else
       #Notice to be shown on the owner path about unsuccessful update
       flash[:notice] = "Update not saved"
-      redirect_to owner_path(Dog.where(owner_id: params[:id]))
     end
+    redirect_to owner_path(owner_id: params[:id])
   end #end update method
 end

@@ -53,46 +53,50 @@
 									Treats low<%= check_box_tag 'treats_low', 'yes',dog.treats_low_flag, disabled:true%>
 									<br />
 									<br />
-									<%= link_to "Edit", edit_dog_path(dog) %>|
-									<%= link_to "See details", dog_path(dog) %>|
-									<%= link_to 'Delete relationship', relationship_path(owner_id: params[:id], dog_id: dog.id), method: :delete %>
-								
-									<hr class='separateOwnerInfo'>
+
+									<div class='text-center'>
+									<%= link_to "Edit", edit_dog_path(dog), class:'linksColor' %> |
+									<%= link_to "See details", dog_path(dog), class:'linksColor' %> |
+									<%= link_to 'Delete relationship', relationship_path(owner_id: params[:id], dog_id: dog.id), method: :delete, class:'linksColor' %>
+								</div>
+
 									<!--**********************************-->
 									<!-- Start owners section             -->
 									<!--**********************************-->
 									<!-- Find all owners of the current dog being shown -->
 									<% dog_owners = all_owners(dog.id) %>
-									<table class='all_dog_owners'>	
-										<tbody>
+									<!-- Only shows this if there's more than one owner -->
+									<% if dog_owners.count !=1 %>
+										<hr class='separateOwnerInfo'>
+										<table class='all_dog_owners'>	
+											<tbody>
 												<h4 class='text-center'>My other owners:</h4>
-											<% dog_owners.each do |dog_owner| %>
-												<% if @owner.id != dog_owner.id %>
-														<!-- Find the current relationship record, to allow for relationship manipulations -->
-														<% current_relationship = Relationship.where(owner_id: dog_owner.id, dog_id: dog.id).first %>
-														<tr>
-															<td><%= image_tag dog_owner.image.url(:thumb)%></td>
-															<td><%= dog_owner.full_name%><!-- </td> -->
+												<% dog_owners.each do |dog_owner| %>
+													<% if @owner.id != dog_owner.id %>
+															<!-- Find the current relationship record, to allow for relationship manipulations -->
+															<% current_relationship = Relationship.where(owner_id: dog_owner.id, dog_id: dog.id).first %>
+															<tr>
+																<td class='ownerListing'><%= image_tag dog_owner.image.url(:thumb)%></td>
+																<td><%= dog_owner.full_name%><!-- </td> -->
 
-															<!-- This creates dynamic info about if the owner on this row is a dog admin and allows you to change that if logged in user is a dog admin -->
+																<!-- This creates dynamic info about if the owner on this row is a dog admin and allows you to change that if logged in user is a dog admin -->
 																<% if is_current_owner_site_admin || @is_dog_admin%>
 																		is 
 																		<% if !current_relationship.is_dog_admin %>
 																			not
 																		<% end %>
 																		a dog admin. <br />
-
 																		<!-- Give a link to edit dog admin status-->
-																		Click <%=link_to "here", edit_relationship_path(current_relationship) %> 	to edit this.
+																		Click <%=link_to "here", edit_relationship_path(current_relationship), class:'linksColor' %> 	to edit this.
 																	</td>
 																<% end %>
-														</tr>
-												<% end %>
-											<% end %> <!-- End dog_owners.each do -->
+															</tr>
+													<% end %> <!-- End if current owner is not equal to the owner we're cycling through -->
+												<% end %> <!-- End dog_owners.each do -->
 
-										</tbody>
-									</table> <!-- End table class='all_dog_owners' -->
-
+											</tbody>
+										</table> <!-- End table class='all_dog_owners' -->
+									<% end %>
 									<!--**********************************-->
 									<!-- End owners section             -->
 									<!--**********************************-->
@@ -104,7 +108,7 @@
 								<!--**********************************-->
 								<%= bootstrap_form_for @dog_daily_status, :url => { :controller => "statuses", :action => "update" } do |f| %>
 									<td class='dogDailyStatus'>
-										<h3 margin-top='0px'>Today I've been:</h3>
+										<h3 class='todayStatusHeader'>Today I've been:</h3>
 										<%= f.check_box  :is_fed_breakfast, label:'Fed breakfast', class:'left-block' %>
 										<%= f.check_box :is_fed_dinner, label:'Fed dinner' %>
 										<%= f.check_box :is_walked, label:'Walked' %>
@@ -113,15 +117,15 @@
 										<!-- Using a hidden field to pass the owner_id! -->
 										<%= f.hidden_field :dog_id, :value => dog.id %> 
 										<%= f.submit 'Save daily status updates', class:'btn btn-primary btn-sm center-block' %>
-										<br />
-										Last updated at: <%= @dog_daily_status.updated_at %><br />
+
+										<div class='text-center'>
+											Last updated at: <%= @dog_daily_status.updated_at %><br />
+										</div>
 									</td>
 								<% end %>
 								<!--**********************************-->
 								<!-- End dog daily status section   -->
 								<!--**********************************-->
-
-
 
 
 							</tr> <!-- End row showing dog info -->

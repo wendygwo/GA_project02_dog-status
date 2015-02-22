@@ -7,7 +7,7 @@
 <!-- Shows you the page if you are a site admin -->
 	<h1 class='text-success text-center'>You are able to view this page because you are a site admin</h1>
 	<div class='dogContainer'>
-		<h1 class='text-center'>Dogs list</h1>
+		<h1 class='text-center whiteText'>Dogs list</h1>
 
 		<table class='well well-lg'>
 			<thead>
@@ -39,9 +39,9 @@
 				<% end %>
 			</tbody>
 		</table>
-
-		<%= link_to 'Add a new dog', new_dog_path%>
-
+		<div class ='col-md-12 text-center'>
+			<%= link_to 'Add a new dog', new_dog_path%>
+		</div>
 	</div>
 
 <% end %>

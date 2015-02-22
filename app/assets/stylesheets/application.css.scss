@@ -15,40 +15,49 @@
  *= require_self
  */
 @import 'bootstrap';
+// @import url(https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Rock+Salt);
+// @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono|Gloria+Hallelujah|Rock+Salt);
+// $mainfonttest: 'Ubuntu Mono';
+@import url(https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Rock+Salt);
+$mainfonttabledata:'Gloria Hallelujah', cursive;
+$mainfonttableheader:'Rock Salt', cursive; //seems like very real handwriting. Can look a little messy or childish
+$paletteBrown: #463730;
+$paletteWhite: #F7F7FF;
+$blueBackground: #3F7CAC;
 body{
 	padding-top: 50px;
 }
 
-.brandImage{
+.brandImage, .avatarImage{
 	height: 25px;
 	width: 25px;
 }
 .numTreats{
 	width: 75px;
 }
-// @import url(https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Rock+Salt);
-@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono|Gloria+Hallelujah|Rock+Salt);
-$mainfonttabledata:'Gloria Hallelujah', cursive;
-$mainfonttableheader:'Rock Salt', cursive; //seems like very real handwriting. Can look a little messy or childish
-$mainfonttest: 'Ubuntu Mono';
-$paletteBrown: #463730;
-$paletteWhite: #F7F7FF;
-$blueBackground: #3F7CAC;
 
 #navigation{
-	font-family: $mainfonttest;
+	// font-family: $mainfonttest;
 	font-size: 115%;
 }
 //For navbar brand
 .brandTextSize{
 	font-size: 125%;
+	font-family: $mainfonttableheader;
 }
-
+h3.todayStatusHeader{
+	margin-top: 0px;
+}
 //Generic styling
 .whiteText{
 	color: $paletteWhite;
 }
-
+a.linksColor{
+	color: $paletteWhite;
+}
+td.ownerListing{
+	padding-bottom: 15px;
+}
 //Login page
 .login {
 	background: asset-url('black_lab_puppy.jpg') no-repeat top center fixed;
@@ -66,7 +75,7 @@ $blueBackground: #3F7CAC;
 	@extend .whiteText;
 }
 .showH1Font{
-	font-family: $mainfonttest;
+	// font-family: $mainfonttest;
 }
 .helperTextClass{
 	color:white;
