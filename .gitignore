@@ -17,3 +17,5 @@
 
 #ignore the seed file when pushing to github
 /db/seeds.rb
+# Ignore application configuration
+/config/application.yml

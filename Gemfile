@@ -48,6 +48,8 @@ gem "paperclip", "~> 4.2"
 
 gem 'better_errors'
 gem 'bootstrap_form'
+gem 'letter_opener', group: :development
+gem 'figaro'
 
 group :production do
 	gem 'rails_12factor'

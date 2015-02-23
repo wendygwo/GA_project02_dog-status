@@ -16,6 +16,7 @@ class OwnersController < ApplicationController
 		@owner = Owner.new
 	end
 	def create
+		# raise params.inspect
 		@owner=Owner.create(owner_params) 
 		# @owner=Owner.create(params.require(:owner).permit(:username, :first_name, :last_name,:image)) 
 		if is_current_owner_site_admin
@@ -28,16 +29,12 @@ class OwnersController < ApplicationController
 		if @owner.save
 			#redirect to owner show page and create session cookie if user successfully created
 			session['owner_id'] = @owner.id.to_s
+			# send out a welcome e-mail with the successful creation of a new user
+			OwnerMailer.welcome(params[:owner]).deliver
 			redirect_to owner_path(@owner)
 		else
 			# redirect_to new_owner_path
 			render 'new'
-			# puts '=================================='
-			# puts 'Errors'
-			# puts @owner.errors
-			# puts 'Full error messages'
-			# puts @owner.errors.full_messages
-			# puts '=================================='
 		end
 	end
 	def edit
@@ -62,7 +59,6 @@ class OwnersController < ApplicationController
 	end
 	
 	private
-
 	def owner_params
 		params.require(:owner).permit(:username, :first_name, :last_name,:password,:password_confirmation,:image,:email)
 	end
