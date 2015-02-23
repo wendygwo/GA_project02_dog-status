@@ -44,7 +44,7 @@ class DogsController < ApplicationController
 			#Automatically makes the owner who added this relationship as a dog_admin
 			@dog.relationships.create(owner: @owner, is_dog_admin:true) 
 			# Create the first status record when a new dog is created
-			@status = @dog.statuses.create(is_fed_breakfast:false, is_fed_dinner:false, is_walked:false, num_treats_given:2, notes:'No notes.')
+			@status = @dog.statuses.create(is_fed_breakfast:false, is_fed_dinner:false, is_walked:false, num_treats_given:0, notes:'No notes.')
 			#redirects to the show page of the owner who requested the dog be added
 			redirect_to owner_path(@owner) 
 		else

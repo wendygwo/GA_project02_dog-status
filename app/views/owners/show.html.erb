@@ -71,7 +71,7 @@
 										<table class='all_dog_owners'>	
 											<tbody>
 												<h4 class='text-center'>My other owners:</h4>
-												<% @is_dog_admin = Relationship.where(owner_id: current_owner.id, dog_id: dog.id).first%>
+												<% @is_dog_admin = Relationship.where(owner_id: current_owner.id, dog_id: dog.id).first.is_dog_admin%>
 												<% dog_owners.each do |dog_owner| %>
 													<% if @owner.id != dog_owner.id %>
 															<!-- Find the current relationship record, to allow for relationship manipulations -->
