@@ -1,11 +1,11 @@
 <!-- Only let site admins view this page -->
-<% if !is_current_owner_site_admin %>
-<!-- Shows an error message if you aren't a site admin -->
-<h1 class='text-danger'>You can't view this page because you aren't a site admin</h1>
-<%=link_to 'Click here to go back to your doggie dashboard', owner_path(current_owner) %>
+<% if !is_current_owner_site_admin && !@is_dog_admin%>
+	<!-- Shows an error message if you aren't a site admin -->
+	<h1 class='text-danger'>You can't view this page because you aren't a site admin</h1>
+	<%=link_to 'Click here to go back to your doggie dashboard', owner_path(current_owner) %>
 <% else %>
 	<!-- Shows you the page if you are a site admin -->
-	<h1 class='text-success text-center'>You are able to view this page because you are a site admin</h1>
+	<h1 class='text-success text-center'>You have the proper permissions to view this page</h1>
 	<div class='container-fluid'>
 		<div class='row whiteText'>
 			<div class='col-xs-4 col-xs-offset-4'>
@@ -17,10 +17,11 @@
 
 					<%=form_for @relationship do |f|%>
 						<p>Dog admin: <%=f.check_box :is_dog_admin %></p>
-						<%=f.submit 'Update admin status', class:'btn btn-primary'%> <br />
+						<%=f.submit 'Update admin status', class:'btn btn-primary center-block'%> <br />
 					<% end %>
-					<%= link_to 'Cancel', relationships_path %>
-
+					<div class='text-center'>
+						<%= link_to 'Cancel', dog_path(@relationship.dog) %>
+					</div>
 				</div>
 			</div>
 	</div>

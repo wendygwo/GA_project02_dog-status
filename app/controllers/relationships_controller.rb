@@ -26,9 +26,14 @@ class RelationshipsController < ApplicationController
 				# Finds all owners that are not part of the existing owners array, that we found above
 				# This is what the collection select will be on
 				@users_not_already_owners = Owner.where.not(id: @existing_owners_array)
+
 			end
-			
-			 
+			if Relationship.where(dog_id: params[:dog_id], owner_id: current_owner.id).first != nil
+				#allows current user to view the new relationship page if they are an owner of the dog
+				@is_dog_owner = true
+			else
+				@is_dog_owner=false
+			end		
 		else
 			redirect_to new_session_path #redirects user to new session path if no owner is logged in
 		end
@@ -36,14 +41,13 @@ class RelationshipsController < ApplicationController
 	def edit
 		if current_owner != nil
 			@relationship = Relationship.find(params[:id])
+			@is_dog_admin = Relationship.where(dog_id: @relationship.dog_id, owner_id: current_owner.id).first.is_dog_admin
 		else
 			redirect_to new_session_path #redirects user to new session path if no owner is logged in
 		end
 	end
 	def create
-		# puts '======================================================'
-		# raise params.inspect
-		# puts '======================================================'
+
 		@relationship = Relationship.create(params.require(:relationship).permit(:dog_id, :owner_id, :is_dog_admin))
 		if @relationship.save
 			redirect_to dog_path(@relationship.dog)
@@ -52,9 +56,6 @@ class RelationshipsController < ApplicationController
 		end
 	end
 	def update
-		# puts '======================================================'
-		# raise params.inspect
-		# puts '======================================================'
 		@relationship = Relationship.find(params[:id])
 		#For update, I'm only letting them update the is dog admin part. I don't want to remove a relationship unless it's from the dog_show page
 		if @relationship.update_attributes(params.require(:relationship).permit(:is_dog_admin))

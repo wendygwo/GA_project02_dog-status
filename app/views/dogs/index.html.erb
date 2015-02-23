@@ -9,17 +9,17 @@
 	<div class='dogContainer'>
 		<h1 class='text-center whiteText'>Dogs list</h1>
 
-		<table class='well well-lg'>
+		<table class='well well-lg text-center'>
 			<thead>
 				<tr>
-					<th>Dog ID</th>
-					<th>Dog name</th>
-					<th>Breed</th>
-					<th>Birthday</th>
-					<th>Food low?</th>
-					<th>Treats low?</th>
-					<th>Photo path</th>
-					<th colspan="3">Actions</th>
+					<th class='text-center'>Dog ID</th>
+					<th class='text-center'>Dog name</th>
+					<th class='text-center'>Breed</th>
+					<th class='text-center'>Birthday</th>
+					<th class='text-center'>Food low?</th>
+					<th class='text-center'>Treats low?</th>
+					<th class='text-center'>Photo path</th>
+					<th class='text-center' colspan="3">Actions</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -32,8 +32,8 @@
 						<td><%= check_box_tag 'food_low', 'yes', dog.food_low_flag, disabled:true%>
 						<td><%= check_box_tag 'treats_low', 'yes', dog.treats_low_flag, disabled:true%>
 						<td><%= image_tag dog.image.url(:thumb) %></td>
-						<td><%=link_to "See this dog's details", dog_path(dog) %></td>
-						<td><%=link_to 'Edit this dog', edit_dog_path(dog) %></td>
+						<td><%=link_to "See this dog's details", dog_path(dog) %>|</td>
+						<td><%=link_to 'Edit this dog', edit_dog_path(dog) %>|</td>
 						<td><%=link_to 'Delete this dog', dog, method: :delete, data: {confirm: 'Are you sure you want to delete this dog?'} %></td>
 					</tr>
 				<% end %>

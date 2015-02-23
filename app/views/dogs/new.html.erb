@@ -16,21 +16,14 @@
 				<p><%=f.check_box :treats_low_flag, label: "Treats low?" %></p> <!-- Shows checkbox based on database value -->
 				<p><%=f.file_field :image, label: "Choose a profile picture" %> </p><br />
 
-				<!-- <p>Owner: <%#= @owner %></p> -->
-
 				<!-- Using a hidden field to pass the owner_id! -->
 				<%= f.hidden_field :dog_owner_id, :value => @owner.id %> 
-
+				<!-- Submit button for add new dog form -->
 				<%= f.submit 'Add this dog!', :class =>  'btn btn-primary center-block'  %> 
-
-
-				<div class='row'>
-					<div class='col-xs-4 col-xs-offset-4'>
-						<%= link_to 'Cancel', owner_path(@owner) , class:'text-center'%>
-					</div>
-				</div>
-
 			<% end %>
-		</div>
-	</div>
+			<div class='text-center'>
+				<%= link_to 'Cancel', owner_path(@owner) %>
+			</div>
+		</div> <!-- End class='col-xs-4 col-xs-offset-4' -->
+	</div> <!-- End row with form -->
 </div>

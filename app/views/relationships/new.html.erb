@@ -1,4 +1,4 @@
-<% if is_current_owner_site_admin || @relationship.is_dog_admin%>
+<% if is_current_owner_site_admin || @is_dog_owner %>
 	<div class='row whiteText'>
 		<h1 class='text-center'>Add a new owner relationship </h1>
 		<div class='col-xs-6 col-xs-offset-3'>
@@ -15,7 +15,7 @@
 			<% end %>
 		<% else %>
 			<!-- Shows an error message if you aren't a site admin -->
-			<h1 class='text-danger'>You can't view this page because you aren't a dog admin</h1>
+			<h1 class='text-danger'>You don't have the proper permissions to view this page</h1>
 			<%=link_to 'Click here to go back to your doggie dashboard', owner_path(current_owner) %>
 		</div>
 	</div>

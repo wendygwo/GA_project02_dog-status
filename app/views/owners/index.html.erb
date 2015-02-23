@@ -12,16 +12,17 @@
 		</div>
 
 		<div class ='col-md-12'>
-			<table class='well well-lg'>
-				<thead>
+			<table class='well well-lg text-center'>
+				<thead >
 					<tr>
-						<th>Owner ID</th>
-						<th>Owner username</th>
-						<th>Owner email</th>
-						<th>Owner first name</th>
-						<th>Owner second name</th>
-						<th>Picture</th>
-						<th colspan="3">Actions</th>
+						<th class='text-center'>Owner ID</th>
+						<th class='text-center'>Owner username</th>
+						<th class='text-center'>Owner email</th>
+						<th class='text-center'>Owner first name</th>
+						<th class='text-center'>Owner second name</th>
+						<th class='text-center'>Picture</th>
+						<th class='text-center'>Site admin?</th>
+						<th class='text-center'colspan="3">Actions</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -33,6 +34,7 @@
 							<td><%=owner.first_name%></td>
 							<td><%=owner.last_name%></td>
 							<td><%=image_tag owner.image.url(:thumb)%></td>
+							<th><%= check_box_tag 'is_site_admin', 'yes', owner.is_site_admin %>
 							<td><%= link_to 'See owner details', owner_path(owner)%></td>
 							<td><%= link_to 'Edit owner details', edit_owner_path(owner)%></td>
 							<td><%= link_to 'Delete this owner', owner, method: :delete, data: {confirm: 'Are you sure?'} %></td>

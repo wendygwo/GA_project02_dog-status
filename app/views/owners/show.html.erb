@@ -71,6 +71,7 @@
 										<table class='all_dog_owners'>	
 											<tbody>
 												<h4 class='text-center'>My other owners:</h4>
+												<% @is_dog_admin = Relationship.where(owner_id: current_owner.id, dog_id: dog.id).first%>
 												<% dog_owners.each do |dog_owner| %>
 													<% if @owner.id != dog_owner.id %>
 															<!-- Find the current relationship record, to allow for relationship manipulations -->
@@ -132,9 +133,9 @@
 						</tbody> <!-- End body showing dog info -->
 					</table> <br /> <!-- End table showing all dog info -->
 				<% end %> <!-- End each dog do -->
-				<div class='	text-center'>
+				<div class='text-center'>
 					<!-- This lets you pass in a parameter of your own naming -->
-					<%= link_to 'Add a new dog', new_dog_path(:owner_id => @owner.id) %>
+					<%= link_to 'Add a new dog', new_dog_path(:owner_id => @owner.id) , class:'btn btn-primary'%>
 				</div>
 
 			</div> <!-- End the class='col-xs-10 col-xs-offset-1' for dog details -->

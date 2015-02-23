@@ -12,6 +12,9 @@
 				<%= f.text_field :email%>
 				<%= f.text_field :first_name %> <br />
 				<%= f.text_field :last_name %> <br />
+				<% if is_current_owner_site_admin%>
+					<%= f.check_box :is_site_admin %> <br />
+				<% end %>
 				<% if @owner.image_file_name != nil%>
 					<p>Your current profile picture</p>
 					<%= image_tag @owner.image.url(:thumb) %>  <!-- Show current profile picture -->

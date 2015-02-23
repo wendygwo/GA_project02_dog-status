@@ -72,7 +72,9 @@
           <% if current_owner != nil %>
             <li class='dropdown'>
               <%= link_to  '#', class:'dropdown-toggle', role:"button", 'aria-expanded'=>"false",:data => {:toggle => "dropdown"} do %> 
-                <%= image_tag current_owner.image.url(:thumb), :class => 'avatarImage'%>
+                <% if current_owner.image_file_name != nil %>
+                  <%= image_tag current_owner.image.url(:thumb), :class => 'avatarImage'%>
+                <% end %>  
                 <%= current_owner.full_name%> <span class="caret"></span>
               <% end%>
               <ul class="dropdown-menu" role="menu">
@@ -80,6 +82,7 @@
                   <!-- Link to current user's show page, with dog info -->
                   <%= link_to 'My doggy dashboard', owner_path(current_owner)%>
                 </li>
+                <li><%= link_to 'Add a new dog', new_dog_path(owner_id: current_owner.id) %></li>
                 <li><%= link_to 'Edit profile', edit_owner_path(current_owner)%></li>
                 <li><%= link_to 'Log out', logout_path, method: :delete %></li>
               </ul>
@@ -94,16 +97,6 @@
   </nav>
 
   <%= yield %>
-
-<!--   <div class ='col-md-12'>
-  	<br>
-  	<br>
-  	<hr>
-  	<h3>Parameters (delete this from application.html.erb later!)</h3>
-  	<%= params.inspect %>
-    <p>Session ID: <p>
-    <%#=session['owner_id']%>
-  </div> -->
 
 </body>
 </html>
