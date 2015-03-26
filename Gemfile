@@ -50,6 +50,7 @@ gem 'better_errors'
 gem 'bootstrap_form'
 gem 'letter_opener', group: :development
 gem 'figaro'
+gem 'aws-sdk', '<2.0'
 
 group :production do
 	gem 'rails_12factor'
