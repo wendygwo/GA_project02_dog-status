@@ -1,0 +1,40 @@
+<div class='row'>
+  <div class='col-xs-4 col-xs-offset-4 text-center'>
+    <h1>Reset Password</h1>
+  </div>
+</div>
+
+<%= bootstrap_form_for @owner, :url => password_reset_path(params[:id]) do |f| %>
+  <% if @owner.errors.any? %>
+    <div class='error_messages'>
+      <h2>Form is invalid</h2>
+      <ul>
+        <% for message in @owner.errors.full_messages %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class='row'>
+  <div class='col-xs-4 col-xs-offset-4 text-center'>
+    <div class='field'>
+      <%= f.password_field :password %>
+    </div>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-xs-4 col-xs-offset-4 text-center'>
+    <div class='field'>
+      <%= f.password_field :password_confirmation %>
+    </div>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-xs-4 col-xs-offset-4 text-center'>
+    <div class='actions'><%= f.submit 'Update password' %></div>
+  </div>
+</div>
+<% end %>

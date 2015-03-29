@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :password_resets
+
   root to: 'sessions#welcome'
   
   delete '/sessions' => 'sessions#destroy', as: 'logout'

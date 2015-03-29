@@ -22,6 +22,9 @@ Rails.application.configure do
   # Disable Rails's static asset server (Apache or nginx will already do this).
   config.serve_static_assets = false
 
+  # Configure for 
+  config.action_mailer.default_url_options = {:host =>'dogstatus.herokuapp.com'}
+
   config.paperclip_defaults = {
   :storage => :s3,
   :s3_credentials => {

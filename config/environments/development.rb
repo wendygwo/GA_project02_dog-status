@@ -17,6 +17,8 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
   # letter opener gem
   config.action_mailer.delivery_method = :letter_opener
+  # Configure default URL for action mailer
+  config.action_mailer.default_url_options = {:host =>'localhost:3000'}
   
   #Relay e-mail through gmail
   # config.action_mailer.delivery_method = :smtp
