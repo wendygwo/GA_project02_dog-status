@@ -1,5 +1,5 @@
 class OwnerMailer < ActionMailer::Base
-default from: "from@example.com"
+default from: "info@wheremydogsat.com"
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
@@ -23,5 +23,11 @@ default from: "from@example.com"
     @owner_name=owner_name
     @friend_name=friend_name
     mail to: friend_email
+  end
+  def forgot_password(owner)
+    @owner = owner
+    @greeting = "Hi"
+
+    mail to: @owner.email, :subject => 'Reset password instructions'
   end
 end

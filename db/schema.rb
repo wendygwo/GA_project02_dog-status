@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150221173841) do
+ActiveRecord::Schema.define(version: 20150329191857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,8 @@ ActiveRecord::Schema.define(version: 20150221173841) do
     t.datetime "image_updated_at"
     t.boolean  "is_site_admin"
     t.string   "email"
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
   end
 
   create_table "relationships", force: true do |t|
