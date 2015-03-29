@@ -26,6 +26,8 @@
   <body class='relationshipContainer'>
 <% elsif @status || @statuses %>
   <body class='statusContainer'>
+<% elsif (params[:controller]=='sessions' && params[:action] == 'welcome')%>
+  <body class='welcomeContainer'>
 <% else %>
   <body>
 <% end%>
@@ -35,7 +37,7 @@
       <!-- Navbar header -->
       <div class="navbar-header">
         <!-- Using block version of link_to so I can have text and an image show up for the brand -->
-        <%= link_to new_session_path, class:'navbar-brand brandTextSize' do%>
+        <%= link_to sessions_welcome_path, class:'navbar-brand brandTextSize' do%>
           <%= image_tag('dog-house-brand.png', :class => 'brandImage')%>
           Where My Dogs At?
         <% end %>
@@ -89,6 +91,7 @@
             </li>
           <% else %>
             <!-- If not logged in, show login option on toolbar -->
+            <li><%= link_to 'Sign up', new_owner_path %></li>
             <li><%= link_to 'Log in', new_session_path%></li>
           <% end %>
         </ul> <!-- End navbar-right   -->      
