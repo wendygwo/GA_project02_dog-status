@@ -64,6 +64,41 @@ td.ownerListing{
 	background-size: cover;
 	@extend .whiteText;
 }
+//Welcome page
+.welcomeContainer {
+	background: asset-url('black_lab_puppy.jpg') no-repeat top center fixed;
+	background-size: cover;
+	@extend .whiteText;
+}
+#welcome{
+	opacity: 0.6;
+	background-color: white;
+	width: 600px;
+	margin: auto;
+	position: relative;
+	top: 20px;
+	padding:0.7em 0.5em;
+	border-radius: 5%;
+}
+#welcome>h3{
+	color: black;
+	text-align: center;
+	font-size: 2.5em;
+	margin-top: 0em;
+}
+#welcome>p, #welcome>ul>li{
+	color: black;
+	font-size: 1.2em;
+}
+#welcome>ul>li{
+	width: 80%;
+	margin: 0 auto;
+	list-style-image: asset-url('dogFootprint.png');
+}
+#brand{
+	font-family: $mainfonttableheader;
+	font-size: 0.9em;
+}
 //Owner, dog, and relationship pages
 .ownerContainer, .dogContainer, .relationshipContainer, .statusContainer{
 	background-color: #2D2D2A;
@@ -118,11 +153,3 @@ td {
 		font-family: $mainfonttabledata;
 		vertical-align: top;
 }
-
-
-// tr:nth-child(even) {
-// 	background: white;
-// }
-// tr:nth-child(odd){
-// 		background: gray;
-// }

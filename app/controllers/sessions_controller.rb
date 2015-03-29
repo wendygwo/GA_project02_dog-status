@@ -1,4 +1,9 @@
 class SessionsController < ApplicationController
+  def welcome
+    if current_owner != nil
+      redirect_to owner_path(current_owner)
+    end
+  end
   def new
     if current_owner != nil
       redirect_to owner_path(current_owner)
@@ -30,6 +35,6 @@ class SessionsController < ApplicationController
   	#destroy session cookie
     session.destroy
     #redirect to login page
-  	redirect_to new_session_path
+  	redirect_to sessions_welcome_path
   end
 end
